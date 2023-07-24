@@ -1,18 +1,19 @@
 import { createContext, lazy, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
-// import Loyout from './components/Loyout';
-// import Shops from './pages/ShopsPage/Shops';
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Loyout from "./components/Loyout/Loyout";
 
-// const HistoryLazy = lazy(() =>
-//    import('./pages/HistoryPage/History'),
-// );
-// const ProductsLazy = lazy(() =>
-//    import('./components/Products'),
-// );
-// const OrdersLazy = lazy(() =>
-//    import('./pages/OrdersPage/Orders'),
-// );
+const MainLazy = lazy(() =>
+   import('./pages/Main'),
+);
+const TripLazy = lazy(() =>
+   import('./pages/Trip'),
+);
+const BookimgLazy = lazy(() =>
+   import('./pages/Booking'),
+);
 
 export const DeliveryContext = createContext(null);
 
