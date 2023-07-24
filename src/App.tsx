@@ -38,29 +38,14 @@ const App = () => {
     //    value={{ setOrderList, orderList }}
     // >
     <Routes>
-      {/* <Route
-               path="delivery"
-               element={<Loyout />}
-            >
-               <Route
-                  path="shops"
-                  element={<Shops />}
-               >
-                  <Route
-                     path=":id"
-                     element={<ProductsLazy />}
-                  />
-               </Route> */}
-      {/* <Route
-                  path="orders"
-                  element={<OrdersLazy />}
-               /> */}
-      {/* <Route
-                  path="history"
-                  element={<HistoryLazy />}
-               /> */}
-      {/* </Route> */}
-      <Route path="/*" element={<Navigate to="/delivery/shops" />} />
+      <Route path="/sing-up" element={<Register />} />
+      <Route path="/sing-in" element={<Login />} />
+      <Route path="/" element={<Loyout />}>
+        <Route index element={<MainLazy />} />
+        <Route path="trip/:tripId" element={<TripLazy />}/>
+        <Route path="/booking" element={<BookimgLazy />} />
+      </Route>
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
     // </DeliveryContext.Provider>
   );
