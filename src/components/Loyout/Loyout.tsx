@@ -1,5 +1,11 @@
-const Loyout = () => {
-    return (<></>)
-}
+import Header from "../Header/Header";
 
-export default Loyout
+const Loyout = () => {
+  return (
+    <>
+      <Header />
+    </>
+  );
+};
+
+export default Loyout;
