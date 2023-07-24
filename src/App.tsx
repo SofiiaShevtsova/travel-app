@@ -5,15 +5,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Loyout from "./components/Loyout/Loyout";
 
-const MainLazy = lazy(() =>
-   import('./pages/Main'),
-);
-const TripLazy = lazy(() =>
-   import('./pages/Trip'),
-);
-const BookimgLazy = lazy(() =>
-   import('./pages/Booking'),
-);
+const MainLazy = lazy(() => import("./pages/Main"));
+const TripLazy = lazy(() => import("./pages/Trip"));
+const BookimgLazy = lazy(() => import("./pages/Booking"));
 
 export const DeliveryContext = createContext(null);
 
@@ -39,11 +33,11 @@ const App = () => {
     //    value={{ setOrderList, orderList }}
     // >
     <Routes>
-      <Route path="/sing-up" element={<Register />} />
-      <Route path="/sing-in" element={<Login />} />
       <Route path="/" element={<Loyout />}>
         <Route index element={<MainLazy />} />
-        <Route path="trip/:tripId" element={<TripLazy />}/>
+        <Route path="/sing-up" element={<Register />} />
+        <Route path="/sing-in" element={<Login />} />
+        <Route path="trip/:tripId" element={<TripLazy />} />
         <Route path="/booking" element={<BookimgLazy />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
