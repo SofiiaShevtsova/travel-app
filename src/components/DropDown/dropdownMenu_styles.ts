@@ -23,6 +23,7 @@ export const MenuBox = styled.div`
 
   text-align: center;
   font-size: ${p => p.theme.fonts.size200};
+  font-family: ${p =>p.theme.fonts.main};
   &>*{
   transition: ${p=>p.theme.transitions.main};
   }
