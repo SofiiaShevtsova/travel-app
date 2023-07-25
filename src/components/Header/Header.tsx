@@ -6,17 +6,20 @@ import Menu from "../DropDown/Menu";
 import { MdCardTravel } from "react-icons/md";
 import { BiUser } from "react-icons/bi";
 import { constants } from "../../commons/constants";
+import { HeaderBox } from "./header_styles";
 
 const Header = () => {
   return (
-    <div>
+    <HeaderBox>
       <Logo />
-      <LinkIcon path={constants.ROUTES.BOOKING} icon={<MdCardTravel />} />
-      <DropDownMenu
-        button={<ButtonIcon icon={<BiUser />} onClick={() => {}} />}
-        menu={<Menu />}
-      />
-    </div>
+      <div>
+        <LinkIcon path={constants.ROUTES.BOOKING} icon={<MdCardTravel />} />
+        <DropDownMenu
+          button={<ButtonIcon icon={<BiUser />} onClick={() => {}} />}
+          menu={<Menu />}
+        />
+      </div>
+    </HeaderBox>
   );
 };
 
