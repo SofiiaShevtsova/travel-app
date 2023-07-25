@@ -5,24 +5,23 @@ position: fixed;
 top: 0;
 left: 0;
 width: 100vw;
-padding: 20px 30px;
+padding: 0 20px;
 display: flex;
-align-items: flex-end;
+align-items: center;
 justify-content: space-between;
-
-font-size: 24px;
+color: ${p=>p.theme.colors.blue400};
+font-size: ${p=>p.theme.fonts.size500};
+border-bottom: 1px solid ${p=>p.theme.colors.gray};
 `;
 
-export const MenuBox = styled.div`
-  position: absolute;
-  top: 20px;
-  right: 0;
-  min-width: 200px;
-  padding: 10px;
+export const LogoBox = styled.div`
+  color: ${p=>p.theme.colors.blue400};
+  font-weight: 600;
+  font-family: ${p =>p.theme.fonts.logo};
+  `;
+
+export const NavigationBox = styled.nav`
   display: flex;
-  flex-direction: column;
   gap: 10px;
-
-  border: 2px solid red;
-`;
+  `;
 

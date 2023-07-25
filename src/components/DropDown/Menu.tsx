@@ -1,12 +1,12 @@
 import { constants } from "../../commons/constants";
 import LinkText from "../Links/LinksText";
 
-import { MenuBox } from "./dropdownMenu_styles";
+import { MenuBox, UserName} from "./dropdownMenu_styles";
 
 const Menu = () => {
   return (
     <MenuBox>
-      <p>{constants.USER_NAME}</p>
+      <UserName>{constants.USER_NAME}</UserName>
       <LinkText path={constants.ROUTES.LOGIN} text={"Sign out"} />
     </MenuBox>
   );

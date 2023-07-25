@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import { ReactElement } from "react";
-import { Link } from 'react-router-dom'
+import { LinkBox } from "./link_styles";
 
 const LinkText = ({ text, path }:{text:string, path:string}): ReactElement => {
     return (
-        <Link to={path}>
+        <LinkBox to={path}>
             {text}
-        </Link>  
+        </LinkBox>  
     )
 }
 

@@ -7,9 +7,10 @@ export const theme = {
     blue300: "#7cbcde",
     blue400: "#242a3a",
     gray: "#e1e1e1",
-    overlayColor: "rgb(0 0 0 / 30%)",
+    hover: "#00ffff",
+    overlayColor: "rgba(0, 0, 0, 0.3)",
   },
-  shadow: "-1px 4px 74px -16px rgb(0 0 0 / 15%)",
+  shadow: "-1px 4px 74px -16px rgba(0, 0, 0, 0.15)",
   fonts: {
     size100: "14px",
     size200: "16px",
@@ -19,7 +20,7 @@ export const theme = {
     size600: "36px",
 
     main: "Assistant, sans-serif",
-    logo: '"Playfair Display", serif',
+    logo: "'Playfair Display', serif",
   },
   widthContainer: "1000px",
   transitions: {

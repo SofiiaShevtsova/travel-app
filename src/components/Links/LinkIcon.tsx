@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import { ReactElement } from "react";
-import { Link } from 'react-router-dom'
+import { LinkBox } from "./link_styles";
 
 const LinkIcon = ({ icon, path }:{icon:ReactElement, path:string}): ReactElement => {
     return (
-        <Link to={path}>
+        <LinkBox to={path}>
             {icon}
-        </Link>  
+        </LinkBox>  
     )
 }
 

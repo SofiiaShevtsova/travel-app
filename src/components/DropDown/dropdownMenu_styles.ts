@@ -5,19 +5,35 @@ export const DropDownBox = styled.div`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 0 5px;
+  height: 100%;
+  padding: 10px;
+
+  border-left: 1px solid ${p=>p.theme.colors.gray};
 `;
 
 export const MenuBox = styled.div`
   position: absolute;
-  top: 20px;
-  right: 0;
-  min-width: 200px;
+  top: 90%;
+  right: 15px;
+  min-width: 150px;
   padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  background-color: ${p=>p.theme.colors.white};
+  border-radius: 1px;
+  box-shadow: ${p => p.theme.shadow};
 
-  border: 2px solid red;
+  text-align: center;
+  font-size: ${p => p.theme.fonts.size200};
+  &>*{
+  transition: ${p=>p.theme.transitions.main};
+  }
+  &>*:hover {
+  color: ${p => p.theme.colors.white};
+  background-color: ${p=>p.theme.colors.blue300};
+  }
+  `;
+
+export const UserName = styled.p`
+padding: 10px;
 `;
+
 
