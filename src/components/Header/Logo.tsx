@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
+import LinkText from "../Links/LinksText";
+import { constants } from "../../commons/constants";
+import { LogoBox } from "./header_styles";
 
-const Logo = () => {
-    return (<Link to="/">
-        <h3>Travel APP</h3>
-    </Link>)
-}
+const Logo = () => (
+  <LogoBox>
+    <LinkText path={constants.ROUTES.MAIN} text={constants.APP_NAME} />
+  </LogoBox>
+);
 
-export default Logo
+export default Logo;

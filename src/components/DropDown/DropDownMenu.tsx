@@ -1,12 +1,15 @@
 import { ReactElement, useState } from "react"
 
-const DropDownMenu = ({button, menu}: {button:ReactElement, menu: ReactElement}) => {
+import { DropDownBox } from "./dropdownMenu_styles"
+
+const DropDownMenu = ({button, menu}: {button:ReactElement, menu: ReactElement}): ReactElement => {
     const [isOpen, setIsOpen] = useState(false)
-    const onClick = () => setIsOpen(!isOpen)
-    return (<div onClick={onClick}>
+    const onEnter = () => setIsOpen(true)
+    const onLeave = () => setIsOpen(false)
+    return (<DropDownBox onMouseEnter={onEnter} onMouseLeave={onLeave}>
         {button}
         {isOpen && menu}
-    </div>)
+    </DropDownBox>)
 }
 
 export default DropDownMenu

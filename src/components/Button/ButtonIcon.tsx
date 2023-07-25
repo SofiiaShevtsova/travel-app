@@ -1,4 +1,5 @@
 import { ReactElement, useCallback } from "react";
+import { ButtonBox } from "./button_styles";
 
 const ButtonIcon = ({
   icon,
@@ -12,9 +13,9 @@ const ButtonIcon = ({
   }, [onClick]);
 
   return (
-    <button type="button" onClick={handlerOnClick}>
+    <ButtonBox type="button" onClick={handlerOnClick}>
       {icon}
-    </button>
+    </ButtonBox>
   );
 };
 

@@ -5,17 +5,21 @@ import ButtonIcon from "../Button/ButtonIcon";
 import Menu from "../DropDown/Menu";
 import { MdCardTravel } from "react-icons/md";
 import { BiUser } from "react-icons/bi";
+import { constants } from "../../commons/constants";
+import { HeaderBox, NavigationBox } from "./header_styles";
 
 const Header = () => {
   return (
-    <div>
+    <HeaderBox>
       <Logo />
-      <LinkIcon path="/booking" icon={<MdCardTravel />} />
-      <DropDownMenu
-        button={<ButtonIcon icon={<BiUser />} onClick={() => {}} />}
-        menu={<Menu />}
-      />
-    </div>
+      <NavigationBox>
+        <LinkIcon path={constants.ROUTES.BOOKING} icon={<MdCardTravel />} />
+        <DropDownMenu
+          button={<ButtonIcon icon={<BiUser />} onClick={() => {}} />}
+          menu={<Menu />}
+        />
+      </NavigationBox>
+    </HeaderBox>
   );
 };
 
