@@ -1,9 +1,6 @@
-import { Link } from 'react-router-dom';
+import LinkText from '../Links/LinksText'
+import { constants } from '../../commons/constants'
 
-const Logo = () => {
-    return (<Link to="/">
-        <h3>Travel APP</h3>
-    </Link>)
-}
+const Logo = () => (<LinkText path={constants.ROUTES.MAIN} text={constants.APP_NAME}/>)
 
 export default Logo

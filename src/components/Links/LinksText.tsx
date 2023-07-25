@@ -13,6 +13,6 @@ const LinkText = ({ text, path }:{text:string, path:string}): ReactElement => {
 export default LinkText
 
 LinkText.propTypes = {
-  icon: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
 };

@@ -1,5 +1,6 @@
 import { createContext, lazy, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { constants } from "./commons/constants";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -10,6 +11,8 @@ const TripLazy = lazy(() => import("./pages/Trip"));
 const BookimgLazy = lazy(() => import("./pages/Booking"));
 
 export const DeliveryContext = createContext(null);
+
+const {ROUTES:{MAIN, REGISTRATION, LOGIN, TRIP, BOOKING, ALL}} = constants
 
 // const orderListStorege =
 //    JSON.parse(
@@ -33,14 +36,14 @@ const App = () => {
     //    value={{ setOrderList, orderList }}
     // >
     <Routes>
-      <Route path="/" element={<Loyout />}>
+      <Route path={MAIN} element={<Loyout />}>
         <Route index element={<MainLazy />} />
-        <Route path="/sing-up" element={<Register />} />
-        <Route path="/sing-in" element={<Login />} />
-        <Route path="trip/:tripId" element={<TripLazy />} />
-        <Route path="/booking" element={<BookimgLazy />} />
+        <Route path={REGISTRATION} element={<Register />} />
+        <Route path={LOGIN} element={<Login />} />
+        <Route path={TRIP} element={<TripLazy />} />
+        <Route path={BOOKING} element={<BookimgLazy />} />
       </Route>
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path={ALL} element={<Navigate to={MAIN} />} />
     </Routes>
     // </DeliveryContext.Provider>
   );
