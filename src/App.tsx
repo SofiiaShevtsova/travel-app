@@ -6,7 +6,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Loyout from "./components/Loyout/Loyout";
 
-const MainLazy = lazy(() => import("./pages/Main"));
+const MainLazy = lazy(() => import("./pages/Main/Main"));
 const TripLazy = lazy(() => import("./pages/Trip"));
 const BookimgLazy = lazy(() => import("./pages/Booking"));
 
@@ -20,7 +20,7 @@ const {
 } = constants;
 
 const App = () => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState("sofiia");
 
   return (
     <AppContext.Provider value={{ user, setUser }}>

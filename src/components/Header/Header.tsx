@@ -10,20 +10,29 @@ import { HeaderBox, NavigationBox } from "./header_styles";
 import { AppContext } from "../../App";
 import { useContext } from "react";
 
-
 const Header = () => {
   const { user } = useContext(AppContext);
   return (
     <HeaderBox>
       <Logo />
       {user && (
-      <NavigationBox>
-        <LinkIcon path={constants.ROUTES.BOOKING} icon={<MdCardTravel />} />
-        <DropDownMenu
-          button={<ButtonIcon icon={<BiUser />} onClick={() => {}} />}
-          menu={<Menu />}
-        />
-      </NavigationBox>
+        <NavigationBox data-test-id="header-nav">
+          <LinkIcon
+            path={constants.ROUTES.BOOKING}
+            icon={<MdCardTravel />}
+            dataAtribute={"header-bookings-link"}
+          />
+          <DropDownMenu
+            button={
+              <ButtonIcon
+                icon={<BiUser />}
+                onClick={() => {}}
+                dataAtribute={"header-profile-nav"}
+              />
+            }
+            menu={<Menu />}
+          />
+        </NavigationBox>
       )}
     </HeaderBox>
   );

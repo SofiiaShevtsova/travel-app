@@ -7,7 +7,7 @@ export const ButtonBox = styled.button`
     fill: inherit;
     stroke: inherit;
 
-    heigth: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -26,6 +26,11 @@ export const InputStyle = styled.input`
   &:focus, &:hover {
     outline: 2px solid ${p=>p.theme.colors.blue200};
   }
+
+  &::placeholder {
+  color: ${p=>p.theme.colors.blue400};
+  opacity: 0.4;
+}
 `;
 
 
