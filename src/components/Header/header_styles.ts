@@ -5,6 +5,7 @@ position: fixed;
 top: 0;
 left: 0;
 width: 100vw;
+min-height: 80px;
 padding: 0 20px;
 display: flex;
 align-items: center;

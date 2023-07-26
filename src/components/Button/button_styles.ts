@@ -28,3 +28,26 @@ export const ButtonBox = styled.button`
     }
 `;
 
+export const ButtonTextBox = styled.button`
+  width: 100%;
+  min-width: 160px;
+  min-height: 45px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(p) => p.theme.colors.blue200};
+  color: ${p=>p.theme.colors.white};
+  border: none;
+  border-radius: 1px;
+  appearance: none;
+
+  font-family: inherit;
+  font-size: ${p => p.theme.fonts.size300};
+  
+  &:focus, &:hover {
+
+  }
+`;
+
+
