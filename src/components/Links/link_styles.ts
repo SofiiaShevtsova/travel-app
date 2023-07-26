@@ -12,7 +12,6 @@ export const LinkBox = styled(Link)`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
     transition: ${p => p.theme.transitions.main};
     
     & svg {

@@ -8,6 +8,7 @@ export const theme = {
     blue400: "#242a3a",
     gray: "#e1e1e1",
     hover: "#00ffff",
+    error: "#ff0000",
     overlayColor: "rgba(0, 0, 0, 0.3)",
   },
   shadow: "-1px 4px 74px -16px rgba(0, 0, 0, 0.15)",

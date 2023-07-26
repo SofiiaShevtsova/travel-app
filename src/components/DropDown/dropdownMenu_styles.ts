@@ -25,16 +25,12 @@ export const MenuBox = styled.div`
   font-size: ${p => p.theme.fonts.size200};
   font-family: ${p =>p.theme.fonts.main};
   &>*{
-  transition: ${p=>p.theme.transitions.main};
+  transition: ${p => p.theme.transitions.main};
+  padding: 10px;
   }
   &>*:hover {
   color: ${p => p.theme.colors.white};
   background-color: ${p=>p.theme.colors.blue300};
   }
   `;
-
-export const UserName = styled.p`
-padding: 10px;
-`;
-
 

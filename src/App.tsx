@@ -2,8 +2,8 @@ import { createContext, lazy, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { constants } from "./commons/constants";
 
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 import Loyout from "./components/Loyout/Loyout";
 
 const MainLazy = lazy(() => import("./pages/Main"));
