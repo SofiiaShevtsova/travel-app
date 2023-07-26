@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FocusEventHandler, RefCallback } from "react";
-import { InputBox, InputStyle } from "./input_styles";
+import { InputBox, InputStyle, Label } from "./input_styles";
 
 const Input = ({
   newRef,
@@ -16,7 +16,7 @@ const Input = ({
 }) => {
   return (
     <InputBox>
-      {label && <label htmlFor={name}>{label}</label>}
+      {label && <Label htmlFor={name}>{label}</Label>}
       <InputStyle name={name} onBlur={onBlur} onChange={onChange} ref={newRef} />
     </InputBox>
   );

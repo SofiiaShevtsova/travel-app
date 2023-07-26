@@ -1,8 +1,23 @@
-import { ReactElement } from "react"
-import { ButtonTextBox } from "./button_styles"
+import { ReactElement, useCallback } from "react";
+import { ButtonTextBox } from "./button_styles";
 
-const ButtonText = ({text, type}: {text:string, type: 'button'|'submit'}):ReactElement => {
-    return (<ButtonTextBox type={type}>{text}</ButtonTextBox>)
-}
+const ButtonText = ({
+  text,
+  type,
+  onClick = () => {},
+}: {
+  text: string;
+  type: "button" | "submit";
+  onClick?: Function;
+}): ReactElement => {
+  const handleOnClick = useCallback(() => {
+    onClick();
+  }, [onClick]);
+  return (
+    <ButtonTextBox type={type} onClick={handleOnClick}>
+      {text}
+    </ButtonTextBox>
+  );
+};
 
-export default ButtonText
+export default ButtonText;

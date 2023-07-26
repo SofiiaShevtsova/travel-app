@@ -1,13 +1,22 @@
 import { constants } from "../../commons/constants";
-import LinkText from "../Links/LinksText";
-
-import { MenuBox} from "./dropdownMenu_styles";
+import ButtonText from "../Button/ButtonText";
+import { AppContext } from "../../App";
+import { MenuBox } from "./dropdownMenu_styles";
+import { useContext } from "react";
 
 const Menu = () => {
+  const { setUser } = useContext(AppContext);
+
+  const onClick = () => {
+    console.log('click');
+    
+    setUser && setUser("");
+  };
+
   return (
     <MenuBox>
       <p>{constants.USER_NAME}</p>
-      <LinkText path={constants.ROUTES.LOGIN} text={"Sign out"} />
+      <ButtonText text={"Sign out"} type={"button"} onClick={onClick} />
     </MenuBox>
   );
 };

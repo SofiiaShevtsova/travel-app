@@ -7,11 +7,16 @@ import { MdCardTravel } from "react-icons/md";
 import { BiUser } from "react-icons/bi";
 import { constants } from "../../commons/constants";
 import { HeaderBox, NavigationBox } from "./header_styles";
+import { AppContext } from "../../App";
+import { useContext } from "react";
+
 
 const Header = () => {
+  const { user } = useContext(AppContext);
   return (
     <HeaderBox>
       <Logo />
+      {user && (
       <NavigationBox>
         <LinkIcon path={constants.ROUTES.BOOKING} icon={<MdCardTravel />} />
         <DropDownMenu
@@ -19,6 +24,7 @@ const Header = () => {
           menu={<Menu />}
         />
       </NavigationBox>
+      )}
     </HeaderBox>
   );
 };

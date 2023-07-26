@@ -5,8 +5,6 @@ export const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
-
-  cursor: pointer;
 `;
 
 export const InputStyle = styled.input`
@@ -34,4 +32,4 @@ export const InputStyle = styled.input`
 export const Label = styled.label`
 color: inherit;
 font-family: inherit;
-  `;
+`;

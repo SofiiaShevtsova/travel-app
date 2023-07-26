@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const FormBox = styled.form`
+  min-width: 300px;
   max-width: 340px;
   display: flex;
   flex-direction: column;
