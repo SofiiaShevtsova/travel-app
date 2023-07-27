@@ -1,8 +1,8 @@
 import { AiFillHeart } from "react-icons/ai";
-import LinkText from "../Links/LinksText";
+import {LinkText} from "../commons";
 import { FooterBox, Text } from "./footer_styles";
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <FooterBox>
       <Text>from</Text>
@@ -12,5 +12,3 @@ const Footer = () => {
     </FooterBox>
   );
 };
-
-export default Footer;

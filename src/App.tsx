@@ -4,7 +4,7 @@ import { constants } from "./commons/constants";
 
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import Loyout from "./components/Loyout/Loyout";
+import {Loyout} from "./components/commons";
 import { BookingsTrip, TripType } from "./commons/types";
 
 const MainLazy = lazy(() => import("./pages/Main/Main"));
@@ -32,20 +32,13 @@ const App = () => {
   return (
     <AppContext.Provider value={{ tripsList, setList, user, setUser, bookingList, setBooking }}>
       <Routes>
-        {user && (
           <Route path={MAIN} element={<Loyout />}>
             <Route index element={<MainLazy />} />
             <Route path={TRIP+':tripId'} element={<TripLazy />} />
             <Route path={BOOKING} element={<BookimgLazy />} />
-          </Route>
-        )}
-        {!user && (
-          <Route path={MAIN} element={<Loyout />}>
-            <Route index element={<Navigate to={LOGIN} />} />
             <Route path={REGISTRATION} element={<Register />} />
             <Route path={LOGIN} element={<Login />} />
           </Route>
-        )}
         <Route path={ALL} element={<Navigate to={MAIN} />} />
       </Routes>
     </AppContext.Provider>

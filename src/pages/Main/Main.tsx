@@ -1,14 +1,12 @@
-import { ChangeEvent, useState, useEffect } from "react";
-import Input from "../../components/Input/Input";
+import { ChangeEvent, useState, useEffect, useContext } from "react";
 import { FiSearch } from "react-icons/fi";
-import Select from "../../components/Select/Select";
-import { MainBox, FilterBox, InputBox, TripList } from "./main_styles";
+
 import list from "../../data/trips.json";
-import Card from "../../components/Card/Card";
-import Container from "../../components/Container/Container";
+import bookings from '../../data/booking.json';
 import { AppContext } from "../../App";
-import { useContext } from "react";
-import { TripType } from "../../commons/types";
+import { BookingsTrip, TripType } from "../../commons/types";
+import { Input, Select, Card, Container } from "../../components/commons";
+import { MainBox, FilterBox, InputBox, TripList } from "./main_styles";
 
 const selectsArray = [
   {
@@ -34,19 +32,66 @@ const selectsArray = [
 ];
 
 const Main = () => {
-  const [query, setQuery] = useState("");
+  const { setList, tripsList, setBooking, setUser } = useContext(AppContext);
   const arrayTrips: TripType[] = list;
+  const arrayBooking: BookingsTrip[] = bookings;
 
-  const { setList, tripsList } = useContext(AppContext);
+  const [query, setQuery] = useState("");
+  const [duration, setDuration] = useState("");
+  const [level, setLevel] = useState("");
+  const [listFiltred, setListFiltred] = useState(list);
 
   useEffect(() => {
     setList && setList(arrayTrips);
-  }, [arrayTrips, setList]);
+    setBooking && setBooking(arrayBooking);
+    setUser && setUser('')
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const onChange = (event: ChangeEvent) => {
+  useEffect(() => {
+    if (tripsList) {
+      let newList: TripType[] = tripsList;
+      newList = query
+        ? newList.filter(
+            (trip) =>
+              trip.title.toLowerCase().search(query.toLowerCase()) !== -1
+          )
+        : newList;
+      newList =
+        level !== "" ? newList.filter((trip) => trip.level === level) : newList;
+      newList =
+        duration !== ""
+          ? newList.filter((trip) => {
+              switch (duration) {
+                case "0_x_5":
+                  return trip.duration < 6;
+                case "5_x_10":
+                  return trip.duration < 11 && trip.duration > 5;
+                case "10_x":
+                  return trip.duration > 10;
+                default:
+                  break;
+              }
+            })
+          : newList;
+      setListFiltred(newList);
+    }
+  }, [query, level, duration, tripsList]);
+
+  const onChangeQuery = (event: ChangeEvent) => {
     const input: HTMLInputElement = event.target as HTMLInputElement;
     const newQuery: string = input.value;
     setQuery(newQuery);
+  };
+
+  const onChangeSelect = (event: ChangeEvent) => {
+    const element: HTMLSelectElement = event.target as HTMLSelectElement;
+    if (element.id === "duration") {
+      setDuration(element.value);
+    }
+    if (element.id === "level") {
+      setLevel(element.value);
+    }
   };
 
   return (
@@ -56,7 +101,11 @@ const Main = () => {
           <>
             <InputBox>
               <FiSearch />
-              <Input name={"search"} onChange={onChange} placeholder="search by title"/>
+              <Input
+                name={"search"}
+                onChange={onChangeQuery}
+                placeholder="search by title"
+              />
             </InputBox>
             {selectsArray.map((select) => (
               <Select
@@ -64,14 +113,15 @@ const Main = () => {
                 list={select.options}
                 dataAtribute={select.dataAtribute}
                 key={select.dataAtribute}
+                onChange={onChangeSelect}
               />
             ))}
           </>
         </Container>
       </FilterBox>
       <TripList>
-        {tripsList &&
-          tripsList.map((trip) => <Card trip={trip} key={trip.id} />)}
+        {listFiltred &&
+          listFiltred.map((trip) => <Card trip={trip} key={trip.id} />)}
       </TripList>
     </MainBox>
   );

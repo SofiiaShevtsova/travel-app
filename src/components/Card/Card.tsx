@@ -1,11 +1,9 @@
 import { TripType } from "../../commons/types";
-import { CardBox, CardContents } from "./card_styles";
-import CardInfo from "../CardInfo/CardInfo";
-import Price from "../Price/Price";
-import LinkText from "../Links/LinksText";
 import { constants } from "../../commons/constants";
+import {CardInfo, Price, LinkText} from "../commons";
+import { CardBox, CardContents } from "./card_styles";
 
-const Card = ({ trip }: { trip: TripType }) => {
+export const Card = ({ trip }: { trip: TripType }) => {
   return (
     <CardBox data-test-id="trip-card">
       <img data-test-id="trip-card-image" src={trip.image} alt="trip photo" />
@@ -21,5 +19,3 @@ const Card = ({ trip }: { trip: TripType }) => {
     </CardBox>
   );
 };
-
-export default Card;

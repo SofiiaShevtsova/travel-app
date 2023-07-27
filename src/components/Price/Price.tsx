@@ -1,6 +1,6 @@
 import { PriceValue } from "./price_styles";
 
-const Price = ({ price }: { price: number }) => {
+export const Price = ({ price }: { price: number }) => {
   return (
     <div>
       <span>Price</span>
@@ -8,5 +8,3 @@ const Price = ({ price }: { price: number }) => {
     </div>
   );
 };
-
-export default Price;

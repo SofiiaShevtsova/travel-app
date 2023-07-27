@@ -8,7 +8,7 @@ import {
 } from "react";
 import { InputBox, InputStyle, Label } from "./input_styles";
 
-const Input = ({
+export const Input = ({
   newRef,
   name,
   onBlur,
@@ -56,5 +56,3 @@ const Input = ({
     </InputBox>
   );
 };
-
-export default Input;

@@ -1,6 +1,6 @@
 import { constants } from "../../commons/constants";
 import { MenuBox } from "./dropdownMenu_styles";
-import LinkText from "../Links/LinksText";
+import {LinkText} from "../commons";
 
 const Menu = () => {
 
