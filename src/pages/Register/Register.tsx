@@ -1,15 +1,13 @@
-import { RegisterBox } from "./register_styles";
-import Title from "../../components/Title/Title";
-import LinkText from "../../components/Links/LinksText";
-import { constants } from "../../commons/constants";
-import Form from "../../components/Form/Form";
-import { InputInfo } from "../../commons/types";
-import Text from "../../components/Text/Text";
+import { useContext } from "react";
+import { Navigate } from "react-router-dom";
 import { AppContext } from "../../App";
-import {useContext} from 'react'
+import { constants } from "../../commons/constants";
+import { InputInfo } from "../../commons/types";
+import { Title, LinkText, Form, Text } from "../../components/commons";
+import { RegisterBox } from "./register_styles";
 
 const Register = () => {
-  const { setUser } = useContext(AppContext);
+  const { setUser, user } = useContext(AppContext);
 
   const inputInfoArray: InputInfo[] = [
     {
@@ -29,22 +27,22 @@ const Register = () => {
       label: "Password",
       options: { required: true, minLength: 3, maxLength: 20 },
       errorsMessage: "Name must be 3-20 characters",
-      type: 'password',
+      type: "password",
     },
   ];
 
-    const onSubmit = ({email}: {email:string}) => {
+  const onSubmit = ({ email }: { email: string }) => {
     email && setUser && setUser(email);
-  }
-
+  };
 
   return (
     <RegisterBox>
       <Title title={"Sign up"} />
-      <Form fields={inputInfoArray} name={'Sign up'} onSubmit={onSubmit}/>
+      <Form fields={inputInfoArray} name={"Sign up"} onSubmit={onSubmit} />
       <Text text={"Already have an account?"}>
         <LinkText path={constants.ROUTES.LOGIN} text={"Sign in"} />
       </Text>
+      {user && <Navigate to={constants.ROUTES.MAIN} />}
     </RegisterBox>
   );
 };

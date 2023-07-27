@@ -1,9 +1,10 @@
-import { AppContext } from "../../App";
 import { useContext } from "react";
-import { BookingsTrip } from "../../commons/types";
-import ButtonIcon from "../../components/Button/ButtonIcon";
-import { BookingBox, BookingItem, BookingTitle, TotalPrice } from "./booking_styles";
 import { RiCloseFill } from "react-icons/ri";
+
+import { AppContext } from "../../App";
+import { BookingsTrip } from "../../commons/types";
+import {ButtonIcon} from "../../components/commons";
+import { BookingBox, BookingItem, BookingTitle, TotalPrice } from "./booking_styles";
 
 const Booking = () => {
   const { bookingList, setBooking } = useContext(AppContext);
@@ -23,7 +24,7 @@ const Booking = () => {
         bookingList.map((booking: BookingsTrip) => (
           <BookingItem data-test-id="booking" key={booking.tripId}>
             <BookingTitle data-test-id="booking-title">
-              {booking.tripTitle}
+              {booking.trip.title}
             </BookingTitle>
             <span data-test-id="booking-guests">
               {booking.guests} guests

@@ -1,4 +1,4 @@
-import LinkText from "../Links/LinksText";
+import {LinkText} from "../commons";
 import { constants } from "../../commons/constants";
 import { LogoBox } from "./header_styles";
 

@@ -1,10 +1,14 @@
-import { IconBox, SelectBox, SelectStyles } from "./select_styles";
 import {BiSolidDownArrow} from 'react-icons/bi'
+import { IconBox, SelectBox, SelectStyles } from "./select_styles";
 
-const Select = ({ name, dataAtribute, list }: { name: string; dataAtribute: string; list: { value: string; text:string}[] }) => {
+export const Select = ({ name, dataAtribute, list, onChange }: { name: string; dataAtribute: string; onChange: Function; list: { value: string; text: string }[] }) => {
+  const onSelectChange = (event:any) => {
+    onChange(event)
+  }
+  
   return (
     <SelectBox>
-      <SelectStyles data-test-id={dataAtribute} name={name} id={name}>
+      <SelectStyles data-test-id={dataAtribute} name={name} id={name} onChange={onSelectChange}>
         {list.map(options => (<option value={options.value} key={options.value}>{options.text}</option>))}
       </SelectStyles>
       <IconBox>
@@ -13,5 +17,3 @@ const Select = ({ name, dataAtribute, list }: { name: string; dataAtribute: stri
     </SelectBox>
   );
 };
-
-export default Select;

@@ -1,13 +1,11 @@
-import { TripType, InputInfo, BookingsTrip } from "../../commons/types";
-import ButtonIcon from "../Button/ButtonIcon";
-import CardInfo from "../CardInfo/CardInfo";
-import Form from "../Form/Form";
-import { ModalBox, ContectBox, Total } from "./modal_styles";
-import { RiCloseFill } from "react-icons/ri";
 import { useState, useContext } from "react";
+import { RiCloseFill } from "react-icons/ri";
 import { AppContext } from "../../App";
+import { TripType, InputInfo, BookingsTrip } from "../../commons/types";
+import {ButtonIcon, CardInfo, Form} from "../commons";
+import { ModalBox, ContectBox, Total } from "./modal_styles";
 
-const Modal = ({ trip, setOpen }: { trip: TripType; setOpen: Function }) => {
+export const Modal = ({ trip, setOpen }: { trip: TripType; setOpen: Function }) => {
   const [date, setDate] = useState("");
   const [guests, setGuests]: [
     number,
@@ -52,13 +50,17 @@ const Modal = ({ trip, setOpen }: { trip: TripType; setOpen: Function }) => {
   const formSubmit = (data: any) => {
     if (data) {
       const bookingTrip: BookingsTrip = {
-        tripTitle: trip.title,
+        id: `${Math.random()}`,
+        userId: 'asdfg',
         tripId: trip.id,
         totalPrice: trip.price * guests,
         guests,
         date,
+        createdAt: new Date().toString(),
+        trip
       };
-        setBooking && setBooking((previous:any)=>[...previous, bookingTrip]);
+      setBooking && setBooking((previous: any) => [...previous, bookingTrip]);
+      setOpen(false);
     }
   };
 
@@ -88,5 +90,3 @@ const Modal = ({ trip, setOpen }: { trip: TripType; setOpen: Function }) => {
     </ModalBox>
   );
 };
-
-export default Modal;

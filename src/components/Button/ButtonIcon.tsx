@@ -1,7 +1,7 @@
 import { ReactElement, useCallback } from "react";
 import { ButtonBox } from "./button_styles";
 
-const ButtonIcon = ({
+export const ButtonIcon = ({
   icon,
   dataAtribute,
   id,
@@ -28,4 +28,3 @@ const ButtonIcon = ({
   );
 };
 
-export default ButtonIcon;

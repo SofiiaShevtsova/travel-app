@@ -1,11 +1,10 @@
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
-import { LoyoutBox } from "./loyout_styles";
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import { Footer, Header } from "../commons";
+import { LoyoutBox } from "./loyout_styles";
 
 
-const Loyout = () => {
+export const Loyout = () => {
   return (
     <LoyoutBox>
       <Suspense fallback={<div>Loading...</div>}>
@@ -16,5 +15,3 @@ const Loyout = () => {
     </LoyoutBox>
   );
 };
-
-export default Loyout;

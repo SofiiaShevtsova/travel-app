@@ -1,3 +1,5 @@
+import Trip from "../pages/Trip/Trip";
+
 export type InputInfo = {
   inputName: string;
   label?: string;
@@ -21,9 +23,16 @@ export type TripType = {
 };
 
 export type BookingsTrip = {
-  tripTitle: string;
-  tripId: string;
+  id: string;
+  userId: string;
+  createdAt: string;
+  trip: {
+    title: string;
+    duration: number;
+    price: number;
+  };
+  tripId?: string;
   guests: number;
   date: string;
   totalPrice: number;
-}
+};

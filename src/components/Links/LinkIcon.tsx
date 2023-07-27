@@ -1,8 +1,7 @@
-import PropTypes from "prop-types";
 import { ReactElement } from "react";
 import { LinkBox } from "./link_styles";
 
-const LinkIcon = ({
+export const LinkIcon = ({
   icon,
   path,
   dataAtribute,
@@ -16,12 +15,4 @@ const LinkIcon = ({
       {icon}
     </LinkBox>
   );
-};
-
-export default LinkIcon;
-
-LinkIcon.propTypes = {
-  icon: PropTypes.element.isRequired,
-  path: PropTypes.string.isRequired,
-  dataAtribute: PropTypes.string,
 };

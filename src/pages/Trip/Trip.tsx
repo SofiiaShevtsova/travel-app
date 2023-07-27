@@ -1,14 +1,10 @@
-import { useState, useEffect } from "react";
-import { AppContext } from "../../App";
-import { useContext } from "react";
-import { TripType } from "../../commons/types";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
+
+import { AppContext } from "../../App";
+import { TripType } from "../../commons/types";
+import {CardInfo, ButtonText, Text, Price, Modal} from "../../components/commons";
 import { TripBox, Image, TripContent } from "./trip_styles";
-import CardInfo from "../../components/CardInfo/CardInfo";
-import Text from "../../components/Text/Text";
-import Price from "../../components/Price/Price";
-import ButtonText from "../../components/Button/ButtonText";
-import Modal from "../../components/Modal/Modal";
 
 const Trip = () => {
   const { tripId } = useParams();

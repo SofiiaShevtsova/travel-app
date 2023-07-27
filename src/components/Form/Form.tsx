@@ -1,12 +1,11 @@
-import Input from "../Input/Input";
-import ButtonText from "../Button/ButtonText";
-import { useForm } from "react-hook-form";
-import { FormBox, FieldBox } from "./form_styles";
-import { InputInfo } from "../../commons/types";
 import { ReactElement } from "react";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { useForm } from "react-hook-form";
 
-const Form = ({
+import { InputInfo } from "../../commons/types";
+import { Input, ButtonText, ErrorMessage } from "../commons";
+import { FormBox, FieldBox } from "./form_styles";
+
+export const Form = ({
   fields,
   name,
   onSubmit,
@@ -65,5 +64,3 @@ const Form = ({
     </FormBox>
   );
 };
-
-export default Form;

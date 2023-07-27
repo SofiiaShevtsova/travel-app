@@ -1,7 +1,7 @@
 import { ReactElement, useCallback } from "react";
 import { ButtonTextBox } from "./button_styles";
 
-const ButtonText = ({
+export const ButtonText = ({
   text,
   type,
   dataAtribute,
@@ -25,5 +25,3 @@ const ButtonText = ({
     </ButtonTextBox>
   );
 };
-
-export default ButtonText;

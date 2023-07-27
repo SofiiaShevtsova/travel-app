@@ -1,21 +1,19 @@
-import Logo from "./Logo";
-import LinkIcon from "../Links/LinkIcon";
-import DropDownMenu from "../DropDown/DropDownMenu";
-import ButtonIcon from "../Button/ButtonIcon";
-import Menu from "../DropDown/Menu";
+import { useContext } from "react";
 import { BiUser, BiBriefcaseAlt } from "react-icons/bi";
+
+import { AppContext } from "../../App";
 import { constants } from "../../commons/constants";
+import {ButtonIcon, LinkIcon, DropDownMenu, Container} from "../commons";
+import Logo from "./Logo";
+import Menu from "../DropDown/Menu";
 import {
   BookingTotal,
   HeaderBox,
   NavigationBox,
   BookingLink,
 } from "./header_styles";
-import { AppContext } from "../../App";
-import { useContext } from "react";
-import Container from "../Container/Container";
 
-const Header = () => {
+export const Header = () => {
   const { tripsList, bookingList } = useContext(AppContext);
   return (
     <HeaderBox>
@@ -51,5 +49,3 @@ const Header = () => {
     </HeaderBox>
   );
 };
-
-export default Header;

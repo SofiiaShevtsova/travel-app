@@ -1,16 +1,13 @@
-import { LoginBox } from "./login_styles";
-import Title from "../../components/Title/Title";
-import LinkText from "../../components/Links/LinksText";
-import { constants } from "../../commons/constants";
-import Form from "../../components/Form/Form";
-import { InputInfo } from "../../commons/types";
-import Text from "../../components/Text/Text";
+import { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
 import { AppContext } from "../../App";
-import {useContext} from 'react'
-
+import { constants } from "../../commons/constants";
+import { InputInfo } from "../../commons/types";
+import {Title, LinkText, Form, Text} from "../../components/commons";
+import { LoginBox } from "./login_styles";
 
 const Login = () => {
-  const { setUser } = useContext(AppContext);
+  const { setUser, user } = useContext(AppContext);
 
   const inputInfoArray: InputInfo[] = [
     {
@@ -39,6 +36,7 @@ const Login = () => {
       <Text text={"Already have not an account?"}>
         <LinkText path={constants.ROUTES.REGISTRATION} text={"Sign up"} />
       </Text>
+      {user&& <Navigate to={constants.ROUTES.MAIN}/>}
     </LoginBox>
   );
 }
