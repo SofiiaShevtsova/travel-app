@@ -5,13 +5,18 @@ import ButtonIcon from "../Button/ButtonIcon";
 import Menu from "../DropDown/Menu";
 import { BiUser, BiBriefcaseAlt } from "react-icons/bi";
 import { constants } from "../../commons/constants";
-import { HeaderBox, NavigationBox } from "./header_styles";
+import {
+  BookingTotal,
+  HeaderBox,
+  NavigationBox,
+  BookingLink,
+} from "./header_styles";
 import { AppContext } from "../../App";
 import { useContext } from "react";
 import Container from "../Container/Container";
 
 const Header = () => {
-  const { tripsList } = useContext(AppContext);
+  const { tripsList, bookingList } = useContext(AppContext);
   return (
     <HeaderBox>
       <Container>
@@ -19,11 +24,16 @@ const Header = () => {
           <Logo />
           {tripsList && (
             <NavigationBox data-test-id="header-nav">
-              <LinkIcon
-                path={constants.ROUTES.BOOKING}
-                icon={<BiBriefcaseAlt />}
-                dataAtribute={"header-bookings-link"}
-              />
+              <BookingLink>
+                <LinkIcon
+                  path={constants.ROUTES.BOOKING}
+                  icon={<BiBriefcaseAlt />}
+                  dataAtribute={"header-bookings-link"}
+                />
+                {bookingList && bookingList?.length > 0 && (
+                  <BookingTotal>{bookingList?.length}</BookingTotal>
+                )}
+              </BookingLink>
               <DropDownMenu
                 button={
                   <ButtonIcon
