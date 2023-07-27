@@ -1,5 +1,4 @@
-import { ChangeEvent, useState, useEffect } from "react";
-import Container from "../../components/Container/Container";
+import { useState, useEffect } from "react";
 import { AppContext } from "../../App";
 import { useContext } from "react";
 import { TripType } from "../../commons/types";
@@ -9,13 +8,31 @@ import CardInfo from "../../components/CardInfo/CardInfo";
 import Text from "../../components/Text/Text";
 import Price from "../../components/Price/Price";
 import ButtonText from "../../components/Button/ButtonText";
+import Modal from "../../components/Modal/Modal";
 
 const Trip = () => {
   const { tripId } = useParams();
-
   const { tripsList } = useContext(AppContext);
 
-  const trip = tripsList?.find((trip) => trip.id === tripId);
+  const [openModal, setOpen] = useState(false);
+  const [trip, setTrip]: [
+    TripType | undefined,
+    React.Dispatch<React.SetStateAction<any>>
+  ] = useState();
+
+  useEffect(() => {
+    if (tripId && tripsList) {
+      const tripFinded: TripType | undefined = tripsList?.find(
+        (trip) => trip.id === tripId
+      );
+      tripFinded && setTrip(tripFinded);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const onClick = () => {
+    setOpen(true);
+  };
 
   return (
     <>
@@ -30,36 +47,12 @@ const Trip = () => {
             <CardInfo trip={trip} />
             <Text text={trip.description} />
             <Price price={trip.price} />
-            <ButtonText text={"Book a trip"} type="button" />
+            <ButtonText text={"Book a trip"} type="button" onClick={onClick} />
           </TripContent>
         </TripBox>
       )}
+      {openModal && trip && <Modal trip={trip} setOpen={setOpen} />}
     </>
-    // <MainBox>
-    //   <FilterBox>
-    //     <Container>
-    //       <>
-    //         <InputBox>
-    //           <FiSearch />
-    //           <Input name={"search"} onChange={onChange} />
-    //         </InputBox>
-    //         {selectsArray.map((select) => (
-    //           <Select
-    //             name={select.name}
-    //             list={select.options}
-    //             dataAtribute={select.dataAtribute}
-    //             key={select.dataAtribute}
-    //           />
-    //         ))}
-    //       </>
-    //     </Container>
-    //   </FilterBox>
-    //   <TripList>
-    //     {tripsList && tripsList.map((trip) => (
-    //       <Card trip={trip} key={trip.id} />
-    //     ))}
-    //   </TripList>
-    // </MainBox>
   );
 };
 

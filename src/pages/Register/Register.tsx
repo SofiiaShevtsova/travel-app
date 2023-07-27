@@ -5,8 +5,12 @@ import { constants } from "../../commons/constants";
 import Form from "../../components/Form/Form";
 import { InputInfo } from "../../commons/types";
 import Text from "../../components/Text/Text";
+import { AppContext } from "../../App";
+import {useContext} from 'react'
 
 const Register = () => {
+  const { setUser } = useContext(AppContext);
+
   const inputInfoArray: InputInfo[] = [
     {
       inputName: "name",
@@ -25,13 +29,19 @@ const Register = () => {
       label: "Password",
       options: { required: true, minLength: 3, maxLength: 20 },
       errorsMessage: "Name must be 3-20 characters",
+      type: 'password',
     },
   ];
+
+    const onSubmit = ({email}: {email:string}) => {
+    email && setUser && setUser(email);
+  }
+
 
   return (
     <RegisterBox>
       <Title title={"Sign up"} />
-      <Form fields={inputInfoArray} name={'Sign up'} />
+      <Form fields={inputInfoArray} name={'Sign up'} onSubmit={onSubmit}/>
       <Text text={"Already have an account?"}>
         <LinkText path={constants.ROUTES.LOGIN} text={"Sign in"} />
       </Text>

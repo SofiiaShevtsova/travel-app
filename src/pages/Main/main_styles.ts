@@ -37,7 +37,7 @@ export const InputBox = styled.label`
   max-width: 350px;
   padding: 0 15px;
   
-  &>*{
+  & input{
   background-color: inherit;
   }
 
