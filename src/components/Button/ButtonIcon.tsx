@@ -4,14 +4,16 @@ import { ButtonBox } from "./button_styles";
 const ButtonIcon = ({
   icon,
   dataAtribute,
+  id,
   onClick = () => {},
 }: {
   icon: ReactElement;
-  dataAtribute?: string;
+    dataAtribute?: string;
+    id?: string;
   onClick: Function;
 }): ReactElement => {
-  const handlerOnClick = useCallback(() => {
-    onClick();
+  const handlerOnClick = useCallback((event:any) => {
+    onClick(event);
   }, [onClick]);
 
   return (
@@ -19,6 +21,7 @@ const ButtonIcon = ({
       type="button"
       onClick={handlerOnClick}
       data-test-id={dataAtribute}
+      id={id}
     >
       {icon}
     </ButtonBox>

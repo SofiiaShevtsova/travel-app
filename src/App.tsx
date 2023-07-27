@@ -9,7 +9,7 @@ import { BookingsTrip, TripType } from "./commons/types";
 
 const MainLazy = lazy(() => import("./pages/Main/Main"));
 const TripLazy = lazy(() => import("./pages/Trip/Trip"));
-const BookimgLazy = lazy(() => import("./pages/Booking"));
+const BookimgLazy = lazy(() => import("./pages/Booking/Booking"));
 
 export const AppContext: React.Context<{
   tripsList?: TripType[];
