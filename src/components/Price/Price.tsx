@@ -1,5 +1,12 @@
-const Price = () => {
-    return(<></>)
-}
+import { PriceValue } from "./price_styles";
 
-export default Price
+const Price = ({ price }: { price: number }) => {
+  return (
+    <div>
+      <span>Price</span>
+      <PriceValue data-test-id="trip-card-price-value">{price}$</PriceValue>
+    </div>
+  );
+};
+
+export default Price;

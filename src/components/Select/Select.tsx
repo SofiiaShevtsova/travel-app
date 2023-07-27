@@ -1,11 +1,16 @@
-const Select = ({ name, list }: { name: string; list: string[] }) => {
+import { IconBox, SelectBox, SelectStyles } from "./select_styles";
+import {BiSolidDownArrow} from 'react-icons/bi'
+
+const Select = ({ name, dataAtribute, list }: { name: string; dataAtribute: string; list: { value: string; text:string}[] }) => {
   return (
-    <select data-test-id="filter-duration" name="duration">
-      <option value="">duration</option>
-      <option value="0_x_5">&lt; 5 days</option>
-      <option value="5_x_10">&lt; 10 days</option>
-      <option value="10_x">&ge; 10 days</option>
-    </select>
+    <SelectBox>
+      <SelectStyles data-test-id={dataAtribute} name={name} id={name}>
+        {list.map(options => (<option value={options.value} key={options.value}>{options.text}</option>))}
+      </SelectStyles>
+      <IconBox>
+      <BiSolidDownArrow/>
+      </IconBox>
+    </SelectBox>
   );
 };
 

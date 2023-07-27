@@ -8,7 +8,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { AppContext } from "../../App";
 
 const Form = ({ fields, name }: { fields: InputInfo[]; name: string }) => {
-  const { setUser } = useContext(AppContext);
+  const { setList, setUser } = useContext(AppContext);
 
   const onSubmit = ({ email }: { email?: string }) => {
     email && setUser && setUser(email);

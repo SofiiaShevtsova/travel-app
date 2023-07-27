@@ -16,7 +16,7 @@ export const constants: Constants = {
         MAIN: '/',
         REGISTRATION: '/sign-up',
         LOGIN: "/sign-in",
-        TRIP: "trip/:tripId",
+        TRIP: "trip/",
         BOOKING: "/booking",
         ALL: "*"
     },

@@ -1,5 +1,9 @@
 @import "modern-normalize/modern-normalize.css";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -28,4 +32,13 @@ li {
 
 button{
   cursor: pointer;
+}
+
+img{
+  display: block;
+}
+
+*::selection {
+  color: #ffffff;
+  background-color: #96daf0;
 }

@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FocusEventHandler, RefCallback, useCallback } from "react";
+import { ChangeEvent, ChangeEventHandler, FocusEventHandler, RefCallback, useCallback } from "react";
 import { InputBox, InputStyle, Label } from "./input_styles";
 
 const Input = ({
@@ -17,9 +17,9 @@ const Input = ({
   placeholder?: string;
   }) => {
   
-  // const handlerOnChange = useCallback((event) => {
-  //   onChange(event)
-  // }, [onChange])
+  const handlerOnChange = useCallback((event:ChangeEvent) => {
+    onChange(event)
+  }, [onChange])
   
   return (
     <InputBox>
@@ -27,7 +27,7 @@ const Input = ({
       <InputStyle
         name={name}
         onBlur={onBlur}
-        onChange={onChange}
+        onChange={handlerOnChange}
         ref={newRef}
         placeholder={placeholder}
       />

@@ -8,11 +8,11 @@ import { Outlet } from 'react-router-dom';
 const Loyout = () => {
   return (
     <LoyoutBox>
-      <Header />
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>
       <Footer />
+      <Header />
     </LoyoutBox>
   );
 };

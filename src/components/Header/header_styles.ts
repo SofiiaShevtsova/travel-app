@@ -7,12 +7,16 @@ left: 0;
 width: 100vw;
 min-height: 80px;
 padding: 0 20px;
+border-bottom: 1px solid ${p => p.theme.colors.gray};
+color: ${p => p.theme.colors.blue400};
+background-color: ${(p) => p.theme.colors.white};
+font-size: ${p=>p.theme.fonts.size500};
+
+&>div{
 display: flex;
 align-items: center;
 justify-content: space-between;
-color: ${p=>p.theme.colors.blue400};
-font-size: ${p=>p.theme.fonts.size500};
-border-bottom: 1px solid ${p=>p.theme.colors.gray};
+}
 `;
 
 export const LogoBox = styled.div`
