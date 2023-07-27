@@ -6,6 +6,8 @@ top: 0;
 left: 0;
 width: 100vw;
 min-height: 80px;
+display: flex;
+align-items: center;
 padding: 0 20px;
 border-bottom: 1px solid ${p => p.theme.colors.gray};
 color: ${p => p.theme.colors.blue400};

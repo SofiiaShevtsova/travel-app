@@ -41,7 +41,7 @@ const Main = () => {
 
   useEffect(() => {
     setList && setList(arrayTrips);
-  }, [setList]);
+  }, [arrayTrips, setList]);
 
   const onChange = (event: ChangeEvent) => {
     const input: HTMLInputElement = event.target as HTMLInputElement;
@@ -56,7 +56,7 @@ const Main = () => {
           <>
             <InputBox>
               <FiSearch />
-              <Input name={"search"} onChange={onChange} />
+              <Input name={"search"} onChange={onChange} placeholder="search by title"/>
             </InputBox>
             {selectsArray.map((select) => (
               <Select

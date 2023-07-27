@@ -3,6 +3,10 @@ export type InputInfo = {
   label?: string;
   options?: object;
   errorsMessage?: string;
+  type?: string;
+  dataAtribute?: string;
+  value?: string | number;
+  placeholder?: string;
 };
 
 export type TripType = {
@@ -15,3 +19,11 @@ export type TripType = {
   image: string;
   createdAt: string;
 };
+
+export type BookingsTrip = {
+  tripTitle: string;
+  tripId: string;
+  guests: number;
+  date: string;
+  totalPrice: number;
+}

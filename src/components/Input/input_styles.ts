@@ -5,8 +5,6 @@ export const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
-
-    background-color: ${(p) => p.theme.colors.blue100};
 `;
 
 export const InputStyle = styled.input`
@@ -21,6 +19,7 @@ export const InputStyle = styled.input`
   border: none;
   border-radius: 1px;
   appearance: none;
+  background-color: ${(p) => p.theme.colors.blue100};
 
   font-family: inherit;
   font-size: ${p => p.theme.fonts.size300};
