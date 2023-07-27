@@ -5,12 +5,15 @@ import { constants } from "./commons/constants";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Loyout from "./components/Loyout/Loyout";
+import { TripType } from "./commons/types";
 
-const MainLazy = lazy(() => import("./pages/Main"));
-const TripLazy = lazy(() => import("./pages/Trip"));
+const MainLazy = lazy(() => import("./pages/Main/Main"));
+const TripLazy = lazy(() => import("./pages/Trip/Trip"));
 const BookimgLazy = lazy(() => import("./pages/Booking"));
 
 export const AppContext: React.Context<{
+  tripsList?: TripType[];
+  setList?: React.Dispatch<any>;
   user?: string;
   setUser?: React.Dispatch<React.SetStateAction<string>>;
 }> = createContext({});
@@ -20,15 +23,16 @@ const {
 } = constants;
 
 const App = () => {
+  const [tripsList, setList] = useState();
   const [user, setUser] = useState("");
 
   return (
-    <AppContext.Provider value={{ user, setUser }}>
+    <AppContext.Provider value={{ tripsList, setList, user, setUser }}>
       <Routes>
         {user && (
           <Route path={MAIN} element={<Loyout />}>
             <Route index element={<MainLazy />} />
-            <Route path={TRIP} element={<TripLazy />} />
+            <Route path={TRIP+':tripId'} element={<TripLazy />} />
             <Route path={BOOKING} element={<BookimgLazy />} />
           </Route>
         )}

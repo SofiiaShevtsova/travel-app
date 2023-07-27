@@ -1,22 +1,13 @@
 import { constants } from "../../commons/constants";
-import ButtonText from "../Button/ButtonText";
-import { AppContext } from "../../App";
 import { MenuBox } from "./dropdownMenu_styles";
-import { useContext } from "react";
+import LinkText from "../Links/LinksText";
 
 const Menu = () => {
-  const { setUser } = useContext(AppContext);
-
-  const onClick = () => {
-    console.log('click');
-    
-    setUser && setUser("");
-  };
 
   return (
-    <MenuBox>
-      <p>{constants.USER_NAME}</p>
-      <ButtonText text={"Sign out"} type={"button"} onClick={onClick} />
+    <MenuBox data-test-id="header-profile-nav-list">
+      <p data-test-id="header-profile-nav-username">{constants.USER_NAME}</p>
+      <LinkText text={"Sign out"} path={constants.ROUTES.LOGIN} dataAtribute={ "header-profile-nav-sign-out"} />
     </MenuBox>
   );
 };

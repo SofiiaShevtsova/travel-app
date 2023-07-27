@@ -19,7 +19,7 @@ export const LinkBox = styled(Link)`
     }
 
     &:hover{
-        text-shadow: ${p=>p.theme.colors.hover} 1px 0 10px;
+        text-shadow: ${p => p.theme.colors.hover} 1px 0 10px;
     }
 
     &:hover svg{

@@ -5,6 +5,8 @@ export const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+
+    background-color: ${(p) => p.theme.colors.blue100};
 `;
 
 export const InputStyle = styled.input`
@@ -14,7 +16,7 @@ export const InputStyle = styled.input`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(p) => p.theme.colors.blue100};
+  background-color: inherit;
   color: inherit;
   border: none;
   border-radius: 1px;
@@ -26,6 +28,11 @@ export const InputStyle = styled.input`
   &:focus, &:hover {
     outline: 2px solid ${p=>p.theme.colors.blue200};
   }
+
+  &::placeholder {
+  color: ${p=>p.theme.colors.blue400};
+  opacity: 0.4;
+}
 `;
 
 

@@ -4,3 +4,14 @@ export type InputInfo = {
   options?: object;
   errorsMessage?: string;
 };
+
+export type TripType = {
+  id: string;
+  title: string;
+  description: string;
+  level: string;
+  duration: number;
+  price: number;
+  image: string;
+  createdAt: string;
+};

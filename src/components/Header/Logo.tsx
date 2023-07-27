@@ -4,7 +4,7 @@ import { LogoBox } from "./header_styles";
 
 const Logo = () => (
   <LogoBox>
-    <LinkText path={constants.ROUTES.MAIN} text={constants.APP_NAME} />
+    <LinkText path={constants.ROUTES.MAIN} text={constants.APP_NAME} dataAtribute={'header-logo'} />
   </LogoBox>
 );
 
