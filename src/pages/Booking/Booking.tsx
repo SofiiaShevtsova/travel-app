@@ -4,7 +4,7 @@ import { RiCloseFill } from "react-icons/ri";
 import { AppContext } from "../../App";
 import { BookingsTrip } from "../../commons/types";
 import {ButtonIcon} from "../../components/commons";
-import { BookingBox, BookingItem, BookingTitle, TotalPrice } from "./";
+import { BookingBox, BookingItem, BookingTitle, TotalPrice } from "./booking_styles";
 
 const Booking = () => {
   const { bookingList, setBooking } = useContext(AppContext);

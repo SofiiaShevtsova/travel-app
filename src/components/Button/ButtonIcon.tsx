@@ -12,8 +12,8 @@ export const ButtonIcon = ({
     id?: string;
   onClick: Function;
 }): ReactElement => {
-  const handlerOnClick = useCallback(() => {
-    onClick();
+  const handlerOnClick = useCallback((event:any) => {
+    onClick(event);
   }, [onClick]);
 
   return (
@@ -21,6 +21,7 @@ export const ButtonIcon = ({
       type="button"
       onClick={handlerOnClick}
       data-test-id={dataAtribute}
+      id={id}
     >
       {icon}
     </ButtonBox>

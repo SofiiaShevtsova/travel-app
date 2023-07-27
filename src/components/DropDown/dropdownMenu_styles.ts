@@ -7,8 +7,6 @@ export const DropDownBox = styled.div`
   align-items: center;
   height: 100%;
   padding: 10px;
-
-  border-left: 1px solid ${p=>p.theme.colors.gray};
 `;
 
 export const MenuBox = styled.div`

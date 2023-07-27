@@ -22,11 +22,16 @@ export const Header = () => {
           <Logo />
           {tripsList && (
             <NavigationBox data-test-id="header-nav">
-              <LinkIcon
-                path={constants.ROUTES.BOOKING}
-                icon={<BiBriefcaseAlt />}
-                dataAtribute={"header-bookings-link"}
-              />
+              <BookingLink>
+                <LinkIcon
+                  path={constants.ROUTES.BOOKING}
+                  icon={<BiBriefcaseAlt />}
+                  dataAtribute={"header-bookings-link"}
+                />
+                {bookingList && bookingList?.length > 0 && (
+                  <BookingTotal>{bookingList?.length}</BookingTotal>
+                )}
+              </BookingLink>
               <DropDownMenu
                 button={
                   <ButtonIcon
