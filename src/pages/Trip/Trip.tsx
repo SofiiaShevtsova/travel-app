@@ -4,18 +4,37 @@ import { AppContext } from "../../App";
 import { useContext } from "react";
 import { TripType } from "../../commons/types";
 import { useParams } from "react-router-dom";
+import { TripBox, Image, TripContent } from "./trip_styles";
+import CardInfo from "../../components/CardInfo/CardInfo";
+import Text from "../../components/Text/Text";
+import Price from "../../components/Price/Price";
+import ButtonText from "../../components/Button/ButtonText";
 
 const Trip = () => {
-    const data = useParams();
-    console.log(data);
-    
+  const { tripId } = useParams();
+
   const { tripsList } = useContext(AppContext);
 
-//   useEffect(() => {
-//      setList && setList(arrayTrip)
-//    }, [setList]);
+  const trip = tripsList?.find((trip) => trip.id === tripId);
 
-  return (<></>
+  return (
+    <>
+      {trip && (
+        <TripBox>
+          <Image
+            data-test-id="trip-details-image"
+            src={trip.image}
+            alt="trip photo"
+          />
+          <TripContent>
+            <CardInfo trip={trip} />
+            <Text text={trip.description} />
+            <Price price={trip.price} />
+            <ButtonText text={"Book a trip"} type="button" />
+          </TripContent>
+        </TripBox>
+      )}
+    </>
     // <MainBox>
     //   <FilterBox>
     //     <Container>
