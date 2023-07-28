@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AppContext } from "../../App";
 import { constants } from "../../commons/constants";
@@ -7,7 +7,7 @@ import {Title, LinkText, Form, Text} from "../../components/commons";
 import { LoginBox } from "./login_styles";
 
 const Login = () => {
-  const { setUser, user } = useContext(AppContext);
+  const { setUser, user, setList } = useContext(AppContext);
 
   const inputInfoArray: InputInfo[] = [
     {
@@ -28,6 +28,11 @@ const Login = () => {
   const onSubmit = ({email}: {email:string}) => {
     email && setUser && setUser(email);
   }
+
+    useEffect(() => {
+    setList && setList(null);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <LoginBox>
