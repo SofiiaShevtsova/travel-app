@@ -22,7 +22,7 @@ import {
    InputBox,
    TripList,
 } from './main_styles';
-import { getTrips } from '../../redux/trip/tripSelectors';
+import { getTrips } from '../../redux/selectors';
 import { getAllTrips } from '../../redux/trip/tripOperations';
 
 const selectsArray = [

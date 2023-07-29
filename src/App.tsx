@@ -31,7 +31,7 @@ import {
 } from './commons/types';
 import { getCurrentUser } from './redux/auth/authOperations';
 import { apiRequest } from './helpers/helpersAPI';
-import { getUser } from './redux/auth/authSelectors';
+import { getUser } from './redux/selectors';
 
 const MainLazy = lazy(
    () => import('./pages/Main/Main'),

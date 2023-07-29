@@ -1,16 +1,15 @@
 import { BiUser, BiBriefcaseAlt } from "react-icons/bi";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { constants } from "../../commons/constants";
 import {ButtonIcon, LinkIcon, DropDownMenu, Container} from "../commons";
 import Logo from "./Logo";
 import Menu from "../DropDown/Menu";
 import {
-  BookingTotal,
   HeaderBox,
   NavigationBox,
   BookingLink,
 } from "./header_styles";
-import { getUser } from "../../redux/auth/authSelectors";
+import { getUser } from "../../redux/selectors";
 
 export const Header = () => {
 const user = useSelector(getUser)

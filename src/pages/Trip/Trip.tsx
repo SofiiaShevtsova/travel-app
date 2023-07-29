@@ -10,13 +10,13 @@ import { TripType } from "../../commons/types";
 import {CardInfo, ButtonText, Text, Price, Modal} from "../../components/commons";
 import { TripBox, Image, TripContent } from "./trip_styles";
 import { getOneTrip } from "../../redux/trip/tripOperations";
-import { getCurrentTrip } from "../../redux/trip/tripSelectors";
+import { getCurrentTrip } from "../../redux/selectors";
 
 const Trip = () => {
   const { tripId } = useParams();
 
   const dispatcher: any = useDispatch();
-  const trip:TripType = useSelector(getCurrentTrip);
+  const trip:TripType|null = useSelector(getCurrentTrip);
 
   const [openModal, setOpen] = useState(false);
 
