@@ -29,7 +29,7 @@ export type BookingsTrip = {
       duration: number;
       price: number;
    };
-   tripId?: string;
+   tripId: string;
    guests: number;
    date: string;
    totalPrice: number;
@@ -53,6 +53,17 @@ export type UserState = {
 
 export type TripState = {
    tripsList: TripType[];
-   currentTrip: TripType|null,
+   currentTrip: TripType | null;
    isFetching: boolean;
+};
+
+export type BookingsState = {
+   bookingsList: BookingsTrip[];
+   isFetchingBookings: boolean;
+}
+
+export type State = {
+    auth: UserState,
+    trips: TripState,
+    bookings: BookingsState
 }
