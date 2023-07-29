@@ -9,9 +9,7 @@ import {
    useSelector,
 } from 'react-redux';
 
-import {
-   TripType,
-} from '../../commons/types';
+import { TripType } from '../../commons/types';
 import {
    Input,
    Select,
@@ -110,6 +108,7 @@ const Main = () => {
                        default:
                           break;
                     }
+                    return true;
                  })
                : newList;
          setListFiltred(newList);
