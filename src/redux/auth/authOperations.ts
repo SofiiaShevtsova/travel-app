@@ -1,97 +1,68 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { apiRequest } from '../../helpers/helpersAPI';
-// import {
-//   signUpUserAPI,
-//   logInUserAPI,
-//   logOutUserAPI,
-//   updateUserInfoAPI,
-//   getCurrentUserAPI,
-// } from 'service/API/Auth&UserAPI';
-
-export const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
+import { apiRequest } from "../../helpers/commons";
+import { constants } from "../../commons/constants";
 
 export const signUp = createAsyncThunk(
-  'auth/signup',
-  async (user, { rejectWithValue }) => {
+  constants.ACTIONS.SIGN_UP,
+  async (newUser, { rejectWithValue }) => {
     try {
-      const { email, password } = user;
-      await signUpUserAPI(user);
-      const data = await logInUserAPI({ email, password });
-      token.set(data.accessToken);
-      return data;
+      const { token, user } = await apiRequest.postRequest(
+        constants.REQUEST_API.AUTH + "/sign-up",
+        newUser
+      );
+      apiRequest.setToken(token);
+      return user;
     } catch (error) {
-      toast.error(`${error.response.data.message}`, {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      // toast.error(`${error.response.data.message}`, {
+      //   position: toast.POSITION.TOP_CENTER,
+      // });
       return rejectWithValue(error);
     }
   }
 );
 
 export const logIn = createAsyncThunk(
-  'auth/login',
-  async (user, { rejectWithValue }) => {
+  constants.ACTIONS.SIGN_IN,
+  async (exixtsUser, { rejectWithValue }) => {
     try {
-      const data = await logInUserAPI(user);
-      token.set(data.accessToken);
-      return data;
+      const { token, user } = await apiRequest.postRequest(
+        constants.REQUEST_API.AUTH + "/sign-in",
+        exixtsUser
+      );
+      apiRequest.setToken(token);
+      return user;
     } catch (error) {
-      toast.error(`${error.response.data.message}`, {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      // toast.error(`${error.response.data.message}`, {
+      //   position: toast.POSITION.TOP_CENTER,
+      // });
       return rejectWithValue(error);
     }
   }
 );
 
 export const logOut = createAsyncThunk(
-  'auth/logout',
+  constants.ACTIONS.LOG_OUT,
   async (_, { rejectWithValue }) => {
     try {
-      const data = await logOutUserAPI();
-      token.unset();
-      return data;
+      const response = await apiRequest.deleteRequest(
+        constants.REQUEST_API.AUTH + "/authenticated-user"
+      );
+      return response;
     } catch (error) {
-      return rejectWithValue(error.response.status);
-    }
-  }
-);
-
-export const updateUserInfo = createAsyncThunk(
-  'auth/update',
-  async (user, { rejectWithValue }) => {
-    try {
-      const data = await updateUserInfoAPI(user);
-      return data;
-    } catch (error) {
-      toast.error(`${error.response.data.message}`, {
-        position: toast.POSITION.TOP_CENTER,
-      });
       return rejectWithValue(error);
     }
   }
 );
 
 export const getCurrentUser = createAsyncThunk(
-  'auth/current',
-  async (_, { rejectWithValue, getState }) => {
-    const state = getState();
-    const persistedAccessToken = state.auth.accessToken;
-    if (!persistedAccessToken) {
-      return rejectWithValue();
-    }
-    token.set(persistedAccessToken);
+  constants.ACTIONS.GET_USER,
+  async (_, { rejectWithValue }) => {
     try {
-      const data = await getCurrentUserAPI();
-      return data;
+      const user = await apiRequest.getRequest(
+        constants.REQUEST_API.AUTH + "/authenticated-user"
+      );
+      return user;
     } catch (error) {
       return rejectWithValue(error);
     }

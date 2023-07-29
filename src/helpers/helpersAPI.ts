@@ -6,13 +6,14 @@ class APIRequest {
 
   constructor(baseURL: string) {
     this.#baseURL = baseURL;
+    this.#token = "";
   }
 
   setToken(token: string) {
     this.#token = token;
   }
 
-  checkToken() {
+  heckToken() {
     if (this.#token) {
       return { headers: { Authorization: "Bearer" + this.#token } };
     }
@@ -60,8 +61,10 @@ class APIRequest {
   }
 
   deleteRequest(url: string): Promise<any> {
-    this.setToken("");
-    return fetch(this.#baseURL + url, { method: "DELETE" })
+    const deleteUser = fetch(this.#baseURL + url, {
+      method: "DELETE",
+      ...this.checkToken(),
+    })
       .then((response) =>
         response.ok ? response.json() : Promise.reject(Error("Failed to load"))
       )
@@ -69,6 +72,8 @@ class APIRequest {
       .catch((error) => {
         throw error;
       });
+    this.setToken("");
+    return deleteUser;
   }
 }
 
