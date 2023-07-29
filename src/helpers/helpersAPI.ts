@@ -1,32 +1,25 @@
+import { constants } from "../commons/constants";
+
 class APIRequest {
   #baseURL: string;
+  #token: string;
 
   constructor(baseURL: string) {
     this.#baseURL = baseURL;
   }
 
-  getRequest = (url: string): Promise<any> =>
-    fetch(this.#baseURL+url, { method: "GET" })
-      .then((response) =>
-        response.ok ? response.json() : Promise.reject(Error("Failed to load"))
-      )
-      .then((data) => data)
-      .catch((error) => {
-        throw error;
-      });
+  setToken(token: string) {
+    this.#token = token;
+  }
 
-  postRequest = (url: string, data: any): Promise<any> =>
-    fetch(this.#baseURL+url, { method: "POST", body: JSON.stringify(data) })
-      .then((response) =>
-        response.ok ? response.json() : Promise.reject(Error("Failed to load"))
-      )
-      .then((data) => data)
-      .catch((error) => {
-        throw error;
-      });
+  checkToken() {
+    if (this.#token) {
+      return { headers: { Authorization: "Bearer" + this.#token } };
+    }
+  }
 
-  patchRequest = (url: string, data: any): Promise<any> =>
-    fetch(this.#baseURL+url, { method: "PATCH", body: JSON.stringify(data) })
+  getRequest(url: string): Promise<any> {
+    return fetch(this.#baseURL + url, { method: "GET", ...this.checkToken() })
       .then((response) =>
         response.ok ? response.json() : Promise.reject(Error("Failed to load"))
       )
@@ -34,9 +27,14 @@ class APIRequest {
       .catch((error) => {
         throw error;
       });
+  }
 
-  deleteRequest = (url: string): Promise<any> =>
-    fetch(this.#baseURL+url, { method: "DELETE" })
+  postRequest(url: string, data: any): Promise<any> {
+    return fetch(this.#baseURL + url, {
+      method: "POST",
+      ...this.checkToken(),
+      body: JSON.stringify(data),
+    })
       .then((response) =>
         response.ok ? response.json() : Promise.reject(Error("Failed to load"))
       )
@@ -44,7 +42,34 @@ class APIRequest {
       .catch((error) => {
         throw error;
       });
+  }
+
+  patchRequest(url: string, data: any): Promise<any> {
+    return fetch(this.#baseURL + url, {
+      method: "PATCH",
+      ...this.checkToken(),
+      body: JSON.stringify(data),
+    })
+      .then((response) =>
+        response.ok ? response.json() : Promise.reject(Error("Failed to load"))
+      )
+      .then((data) => data)
+      .catch((error) => {
+        throw error;
+      });
+  }
+
+  deleteRequest(url: string): Promise<any> {
+    this.setToken("");
+    return fetch(this.#baseURL + url, { method: "DELETE" })
+      .then((response) =>
+        response.ok ? response.json() : Promise.reject(Error("Failed to load"))
+      )
+      .then((data) => data)
+      .catch((error) => {
+        throw error;
+      });
+  }
 }
 
-
-export const apiRequest = new APIRequest('https://binary-travel-app.xyz/api/v1')
+export const apiRequest = new APIRequest(constants.REQUEST_API.BASE_URL);

@@ -1,12 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import {
-  signUpUserAPI,
-  logInUserAPI,
-  logOutUserAPI,
-  updateUserInfoAPI,
-  getCurrentUserAPI,
-} from 'service/API/Auth&UserAPI';
+import { apiRequest } from '../../helpers/helpersAPI';
+// import {
+//   signUpUserAPI,
+//   logInUserAPI,
+//   logOutUserAPI,
+//   updateUserInfoAPI,
+//   getCurrentUserAPI,
+// } from 'service/API/Auth&UserAPI';
 
 export const token = {
   set(token) {
