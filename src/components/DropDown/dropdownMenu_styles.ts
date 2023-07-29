@@ -25,13 +25,7 @@ export const MenuBox = styled.div`
   &>*{
   transition: ${p => p.theme.transitions.main};
   padding: 10px;
-  background-color: inherit;
-  color: inherit;
   font-size: inherit;
-  }
-  &>*:hover {
-  color: ${p => p.theme.colors.white};
-  background-color: ${p=>p.theme.colors.blue300};
   }
   `;
 
