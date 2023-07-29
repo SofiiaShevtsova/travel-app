@@ -1,5 +1,3 @@
-import Trip from "../pages/Trip/Trip";
-
 export type InputInfo = {
   inputName: string;
   label?: string;
@@ -35,4 +33,14 @@ export type BookingsTrip = {
   guests: number;
   date: string;
   totalPrice: number;
+};
+
+export type User = {
+    fullName: string;
+    email: string;
+  }
+
+export type UserState = {
+  user: null| User;
+  isUserFetching: boolean;
 };

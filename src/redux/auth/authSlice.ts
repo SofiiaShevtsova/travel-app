@@ -1,73 +1,60 @@
-import { createSlice } from '@reduxjs/toolkit';
-import {
-  logIn,
-  signUp,
-  logOut,
-  updateUserInfo,
-  getCurrentUser,
-} from './authOperations';
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { logIn, signUp, logOut, getCurrentUser } from "./authOperations";
+import { UserState, User } from "../../commons/types";
 
-const pending = state => {
+const pending = (state: UserState) => {
   state.isUserFetching = true;
 };
-const rejected = state => {
+const finished = (state: UserState) => {
   state.isUserFetching = false;
-  state.isLoggedIn = false;
 };
 
-const initialState = {
-  accessToken: null,
-  isLoggedIn: false,
+const initialState: UserState = {
+  user: null,
   isUserFetching: false,
-  userData: {
-    email: null,
-    name: null,
-    avatar: null,
-  },
 };
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
-  extraReducers: builder =>
+  reducers: {},
+  extraReducers: (builder) => {
     builder
-      .addCase(signUp.fulfilled, (state, { payload }) => {
-        state.userData.email = payload.user.email;
-        state.userData.name = payload.user.name;
-        state.userData.avatar = payload.user.avatar;
-
-        state.accessToken = payload.accessToken;
-        state.isLoggedIn = true;
-        state.isUserFetching = false;
+      .addCase(logOut.fulfilled, (state: UserState): void => {
+        state.user = null;
+        finished(state);
       })
-      .addCase(logIn.fulfilled, (state, { payload }) => {
-        state.userData.email = payload.user.email;
-        state.userData.name = payload.user.name;
-        state.userData.avatar = payload.user.avatarURL;
+      .addCase(logOut.rejected, (state: UserState): void => {
+        finished(state);
+      });
 
-        state.accessToken = payload.accessToken;
-        state.isLoggedIn = true;
-        state.isUserFetching = false;
-      })
-      .addCase(updateUserInfo.fulfilled, (state, { payload }) => {
-        state.userData.name = payload.user.name;
-        state.userData.avatar = payload.user.avatarURL;
-      })
-      .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
-        state.userData.name = payload.user.name;
-        state.userData.avatar = payload.user.avatarURL;
-        state.accessToken = payload.accessToken;
-        state.isUserFetching = false;
-      })
-      .addCase(logOut.fulfilled, () => ({ ...initialState }))
-
-      .addCase(signUp.pending, pending)
-      .addCase(logIn.pending, pending)
-      .addCase(getCurrentUser.pending, pending)
-
-      .addCase(signUp.rejected, rejected)
-      .addCase(getCurrentUser.rejected, () => ({ ...initialState }))
-      .addCase(logIn.rejected, rejected),
+    builder
+      .addMatcher(
+        isAnyOf(
+          signUp.pending,
+          logIn.pending,
+          getCurrentUser.pending,
+          logOut.pending
+        ),
+        (state: UserState): void => {
+          pending(state);
+        }
+      )
+      .addMatcher(
+        isAnyOf(signUp.fulfilled, logIn.fulfilled, getCurrentUser.fulfilled),
+        (state: UserState, { payload }: { payload: User }): void => {
+          state.user = payload;
+          finished(state);
+        }
+      )
+      .addMatcher(
+        isAnyOf(signUp.rejected, logIn.rejected, getCurrentUser.rejected),
+        (state: UserState): void => {
+          state.user = null;
+          finished(state);
+        }
+      );
+  },
 });
 
 export default authSlice.reducer;

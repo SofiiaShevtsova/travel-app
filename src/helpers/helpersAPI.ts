@@ -13,7 +13,7 @@ class APIRequest {
     this.#token = token;
   }
 
-  heckToken() {
+  checkToken() {
     if (this.#token) {
       return { headers: { Authorization: "Bearer" + this.#token } };
     }
