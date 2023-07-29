@@ -1,6 +1,8 @@
-import { createContext, lazy, useState } from "react";
+import { createContext, lazy, useState, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { constants } from "./commons/constants";
+
+import {lokalStorageServices} from './services/commons'
 
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
@@ -24,10 +26,17 @@ const {
   ROUTES: { MAIN, REGISTRATION, LOGIN, TRIP, BOOKING, ALL },
 } = constants;
 
+// const getUserToken:string|undefined = lokalStorageServices.getUserFromLocal();
+
 const App = () => {
   const [tripsList, setList] = useState();
   const [user, setUser] = useState("");
   const [bookingList, setBooking] = useState([]);
+
+  // useEffect(() => {
+    
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <AppContext.Provider value={{ tripsList, setList, user, setUser, bookingList, setBooking }}>
