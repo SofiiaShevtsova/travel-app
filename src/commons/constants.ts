@@ -21,6 +21,8 @@ interface Constants {
     SIGN_IN: string;
     GET_USER: string;
     LOG_OUT: string;
+    GET_TRIPS: string;
+    GET_ONE_TRIP: string;
   };
 }
 
@@ -50,5 +52,7 @@ export const constants: Constants = {
     SIGN_IN: "auth/sing-in",
     GET_USER: "auth/get-current-user",
     LOG_OUT: "auth/log-out",
+    GET_TRIPS: 'trips/get-all',
+    GET_ONE_TRIP:'trips/get-one'
   },
 };

@@ -14,7 +14,7 @@ class APIRequest {
   }
 
   checkToken() {
-    if (this.#token) {
+    if (this.#token!=='') {
       return { "Authorization": "Bearer " + this.#token };
     }
   }
@@ -72,7 +72,7 @@ class APIRequest {
   }
 
   deleteRequest(url: string): Promise<any> {
-    const deleteUser = fetch(this.#baseURL + url, {
+    const deleted = fetch(this.#baseURL + url, {
       method: "DELETE",
       headers: {
         ...this.checkToken(),
@@ -85,8 +85,7 @@ class APIRequest {
       .catch((error) => {
         throw error;
       });
-    this.setToken("");
-    return deleteUser;
+    return deleted;
   }
 }
 
