@@ -35,10 +35,14 @@ export type BookingsTrip = {
   totalPrice: number;
 };
 
-export type User = {
+export interface User {
     fullName: string;
     email: string;
-  }
+}
+  
+export interface NewUser extends  User {
+  password: string;
+}
 
 export type UserState = {
   user: null| User;

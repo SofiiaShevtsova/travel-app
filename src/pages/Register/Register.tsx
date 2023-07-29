@@ -1,17 +1,14 @@
-import { useContext, useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import { AppContext } from "../../App";
+import { useDispatch } from "react-redux";
 import { constants } from "../../commons/constants";
-import { InputInfo } from "../../commons/types";
+import { InputInfo, NewUser } from "../../commons/types";
 import { Title, LinkText, Form, Text } from "../../components/commons";
 import { RegisterBox } from "./register_styles";
+import { signUp } from "../../redux/auth/authOperations";
 
 const Register = () => {
-  const { setUser, user, setList } = useContext(AppContext);
-
   const inputInfoArray: InputInfo[] = [
     {
-      inputName: "name",
+      inputName: "fullName",
       label: "Full name",
       options: { required: true, minLength: 2, maxLength: 20 },
       errorsMessage: "Name must be 2-20 characters",
@@ -31,14 +28,11 @@ const Register = () => {
     },
   ];
 
-  const onSubmit = ({ email }: { email: string }) => {
-    email && setUser && setUser(email);
-  };
+  const dispatcher: any = useDispatch();
 
-  useEffect(() => {
-    setList && setList(null);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const onSubmit = (newUser: NewUser) => {
+    dispatcher(signUp(newUser));
+  };
 
   return (
     <RegisterBox>
@@ -47,7 +41,6 @@ const Register = () => {
       <Text text={"Already have an account?"}>
         <LinkText path={constants.ROUTES.LOGIN} text={"Sign in"} />
       </Text>
-      {user && <Navigate to={constants.ROUTES.MAIN} />}
     </RegisterBox>
   );
 };

@@ -15,12 +15,17 @@ class APIRequest {
 
   checkToken() {
     if (this.#token) {
-      return { headers: { Authorization: "Bearer" + this.#token } };
+      return { "Authorization": "Bearer " + this.#token };
     }
   }
 
   getRequest(url: string): Promise<any> {
-    return fetch(this.#baseURL + url, { method: "GET", ...this.checkToken() })
+    return fetch(this.#baseURL + url, {
+      method: "GET",
+      headers: {
+        ...this.checkToken(),
+      },
+    })
       .then((response) =>
         response.ok ? response.json() : Promise.reject(Error("Failed to load"))
       )
@@ -33,8 +38,11 @@ class APIRequest {
   postRequest(url: string, data: any): Promise<any> {
     return fetch(this.#baseURL + url, {
       method: "POST",
-      ...this.checkToken(),
       body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        ...this.checkToken(),
+      },
     })
       .then((response) =>
         response.ok ? response.json() : Promise.reject(Error("Failed to load"))
@@ -48,8 +56,11 @@ class APIRequest {
   patchRequest(url: string, data: any): Promise<any> {
     return fetch(this.#baseURL + url, {
       method: "PATCH",
-      ...this.checkToken(),
       body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        ...this.checkToken(),
+      },
     })
       .then((response) =>
         response.ok ? response.json() : Promise.reject(Error("Failed to load"))
@@ -63,7 +74,9 @@ class APIRequest {
   deleteRequest(url: string): Promise<any> {
     const deleteUser = fetch(this.#baseURL + url, {
       method: "DELETE",
-      ...this.checkToken(),
+      headers: {
+        ...this.checkToken(),
+      },
     })
       .then((response) =>
         response.ok ? response.json() : Promise.reject(Error("Failed to load"))

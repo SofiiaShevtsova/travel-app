@@ -4,9 +4,9 @@ class LocalStorageService {
   USER_TOKEN: string = "user-token";
 
   getUserFromLocal(): string {
-    const chekedLocal = localStorage.getItem(this.USER_TOKEN);
+    const chekedLocal:string|null = localStorage.getItem(this.USER_TOKEN);
     if (chekedLocal) {
-      const token = JSON.parse(chekedLocal);
+      const token = chekedLocal;
       this.#token = token;
     }
     return this.#token;

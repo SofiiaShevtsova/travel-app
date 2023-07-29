@@ -1,4 +1,4 @@
-import { createContext, lazy, useState, useEffect } from "react";
+import { createContext, lazy, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { constants } from "./commons/constants";
@@ -33,7 +33,12 @@ const {
 const token:string|undefined = lokalStorageServices.getUserFromLocal();
 
 const App = () => {
-  const user: User|null = useSelector(getUser)
+  const user: User | null = useSelector(getUser);
+
+  console.log(user);
+  console.log(token);
+  
+  
   // const [tripsList, setList] = useState();
   // const [bookingList, setBooking] = useState([]);
 
@@ -44,18 +49,17 @@ const App = () => {
       apiRequest.setToken(token)
       dispatcher(getCurrentUser())
     }
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
       <Routes>
             <Route path={MAIN} element={<Loyout />}>
-              <Route index element={(<PrivatRoutes user={user}><MainLazy /></PrivatRoutes>)} />
-              <Route path={TRIP + ":tripId"} element={(<PrivatRoutes user={user}><TripLazy /></PrivatRoutes>)} />
-              <Route path={BOOKING} element={(<PrivatRoutes user={user}><BookimgLazy /></PrivatRoutes>)} />
-              <Route path={REGISTRATION} element={(<PublicRoutes user={user}><Register /></PublicRoutes>)} />
-              <Route path={LOGIN} element={(<PublicRoutes user={user}><Login /></PublicRoutes>)} />
+              <Route index element={(<PrivatRoutes isUser={!!token}><MainLazy /></PrivatRoutes>)} />
+              <Route path={TRIP + ":tripId"} element={(<PrivatRoutes isUser={!!token}><TripLazy /></PrivatRoutes>)} />
+              <Route path={BOOKING} element={(<PrivatRoutes isUser={!!token}><BookimgLazy /></PrivatRoutes>)} />
+              <Route path={REGISTRATION} element={(<PublicRoutes isUser={!!token}><Register /></PublicRoutes>)} />
+              <Route path={LOGIN} element={(<PublicRoutes isUser={!!token}><Login /></PublicRoutes>)} />
             </Route>
         <Route path={ALL} element={<Navigate to={MAIN} />} />
       </Routes>

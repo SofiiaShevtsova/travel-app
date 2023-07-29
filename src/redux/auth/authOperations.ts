@@ -2,17 +2,21 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { apiRequest } from "../../helpers/commons";
 import { constants } from "../../commons/constants";
+import { NewUser } from "../../commons/types";
+import { lokalStorageServices } from "../../services/localStorageServices";
 
 export const signUp = createAsyncThunk(
   constants.ACTIONS.SIGN_UP,
-  async (newUser, { rejectWithValue }) => {
+  async (newUser:NewUser, { rejectWithValue }) => {
     try {
-      const { token, user } = await apiRequest.postRequest(
+      const { token, user:{fullName, email} } = await apiRequest.postRequest(
         constants.REQUEST_API.AUTH + "/sign-up",
         newUser
       );
       apiRequest.setToken(token);
-      return user;
+      lokalStorageServices.setUserToLocal(token);
+    
+      return {fullName, email};
     } catch (error) {
       // toast.error(`${error.response.data.message}`, {
       //   position: toast.POSITION.TOP_CENTER,
