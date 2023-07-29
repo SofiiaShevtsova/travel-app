@@ -1,26 +1,26 @@
 class LocalStorageService {
-  #token: string = '';
+  #token: string = "";
 
   USER_TOKEN: string = "user-token";
 
-  getUserFromLocal():void {
+  getUserFromLocal(): string {
     const chekedLocal = localStorage.getItem(this.USER_TOKEN);
     if (chekedLocal) {
-      const user = JSON.parse(chekedLocal);
-      this.#token = user;
-      return user;
+      const token = JSON.parse(chekedLocal);
+      this.#token = token;
     }
+    return this.#token;
   }
 
-  setUserToLocal(token:string):void {
+  setUserToLocal(token: string): void {
     this.#token = token;
     localStorage.setItem(this.USER_TOKEN, this.#token);
   }
 
   clearLocal() {
-    this.#token = '';
+    this.#token = "";
     localStorage.setItem(this.USER_TOKEN, this.#token);
   }
 }
 
-export const lokalStorageServices = new LocalStorageService()
+export const lokalStorageServices = new LocalStorageService();

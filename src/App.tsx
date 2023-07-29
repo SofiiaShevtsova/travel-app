@@ -1,13 +1,17 @@
 import { createContext, lazy, useState, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
 import { constants } from "./commons/constants";
 
-import {lokalStorageServices} from './services/commons'
+import { lokalStorageServices } from "./services/commons";
 
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import {Loyout} from "./components/commons";
-import { BookingsTrip, TripType } from "./commons/types";
+import { Loyout, PublicRoutes, PrivatRoutes } from "./components/commons";
+import { BookingsTrip, TripType, User } from "./commons/types";
+import { getCurrentUser } from "./redux/auth/authOperations";
+import { apiRequest } from "./helpers/helpersAPI";
+import { getUser } from "./redux/auth/authSelectors";
 
 const MainLazy = lazy(() => import("./pages/Main/Main"));
 const TripLazy = lazy(() => import("./pages/Trip/Trip"));
@@ -19,38 +23,42 @@ export const AppContext: React.Context<{
   user?: string;
   setUser?: React.Dispatch<React.SetStateAction<string>>;
   bookingList?: BookingsTrip[];
-  setBooking?:React.Dispatch<any>;
+  setBooking?: React.Dispatch<any>;
 }> = createContext({});
 
 const {
   ROUTES: { MAIN, REGISTRATION, LOGIN, TRIP, BOOKING, ALL },
 } = constants;
 
-// const getUserToken:string|undefined = lokalStorageServices.getUserFromLocal();
+const token:string|undefined = lokalStorageServices.getUserFromLocal();
 
 const App = () => {
-  const [tripsList, setList] = useState();
-  const [user, setUser] = useState("");
-  const [bookingList, setBooking] = useState([]);
+  const user: User|null = useSelector(getUser)
+  // const [tripsList, setList] = useState();
+  // const [bookingList, setBooking] = useState([]);
 
-  // useEffect(() => {
-    
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  const dispatcher:any = useDispatch()
+
+  useEffect(() => {
+    if (token) {
+      apiRequest.setToken(token)
+      dispatcher(getCurrentUser())
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <AppContext.Provider value={{ tripsList, setList, user, setUser, bookingList, setBooking }}>
       <Routes>
-          <Route path={MAIN} element={<Loyout />}>
-            <Route index element={<MainLazy />} />
-            <Route path={TRIP+':tripId'} element={<TripLazy />} />
-            <Route path={BOOKING} element={<BookimgLazy />} />
-            <Route path={REGISTRATION} element={<Register />} />
-            <Route path={LOGIN} element={<Login />} />
-          </Route>
+            <Route path={MAIN} element={<Loyout />}>
+              <Route index element={(<PrivatRoutes user={user}><MainLazy /></PrivatRoutes>)} />
+              <Route path={TRIP + ":tripId"} element={(<PrivatRoutes user={user}><TripLazy /></PrivatRoutes>)} />
+              <Route path={BOOKING} element={(<PrivatRoutes user={user}><BookimgLazy /></PrivatRoutes>)} />
+              <Route path={REGISTRATION} element={(<PublicRoutes user={user}><Register /></PublicRoutes>)} />
+              <Route path={LOGIN} element={(<PublicRoutes user={user}><Login /></PublicRoutes>)} />
+            </Route>
         <Route path={ALL} element={<Navigate to={MAIN} />} />
       </Routes>
-    </AppContext.Provider>
   );
 };
 

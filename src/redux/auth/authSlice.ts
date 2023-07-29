@@ -14,7 +14,7 @@ const initialState: UserState = {
   isUserFetching: false,
 };
 
-export const authSlice = createSlice({
+export const authSlice:any = createSlice({
   name: "auth",
   initialState,
   reducers: {},
