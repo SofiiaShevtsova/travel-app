@@ -2,6 +2,7 @@ import {
    createContext,
    lazy,
    useEffect,
+   useState,
 } from 'react';
 import {
    Navigate,
@@ -66,10 +67,11 @@ const {
 } = constants;
 
 const token: string | undefined =
-  lokalStorageServices.getUserFromLocal();  
+   lokalStorageServices.getUserFromLocal();
 
 const App = () => {
    const dispatcher: any = useDispatch();
+   const [isUser, setIsUser] = useState(!!token);
 
    const user: User | null = useSelector(getUser);
 
@@ -81,13 +83,17 @@ const App = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
+   useEffect(() => {
+      user && setIsUser(false);
+   }, [user])
+
    return (
       <Routes>
          <Route path={MAIN} element={<Loyout />}>
             <Route
                index
                element={
-                  <PrivatRoutes isUser={!!user}>
+                  <PrivatRoutes isUser={!!user || isUser}>
                      <MainLazy />
                   </PrivatRoutes>
                }
@@ -95,7 +101,7 @@ const App = () => {
             <Route
                path={TRIP + ':tripId'}
                element={
-                  <PrivatRoutes isUser={!!user}>
+                  <PrivatRoutes isUser={!!user || isUser}>
                      <TripLazy />
                   </PrivatRoutes>
                }
@@ -103,7 +109,7 @@ const App = () => {
             <Route
                path={BOOKING}
                element={
-                  <PrivatRoutes isUser={!!user}>
+                  <PrivatRoutes isUser={!!user || isUser}>
                      <BookimgLazy />
                   </PrivatRoutes>
                }
@@ -111,7 +117,7 @@ const App = () => {
             <Route
                path={REGISTRATION}
                element={
-                  <PublicRoutes isUser={!!user}>
+                  <PublicRoutes isUser={!!user || isUser}>
                      <Register />
                   </PublicRoutes>
                }
@@ -119,7 +125,7 @@ const App = () => {
             <Route
                path={LOGIN}
                element={
-                  <PublicRoutes isUser={!!user}>
+                  <PublicRoutes isUser={!!user || isUser}>
                      <Login />
                   </PublicRoutes>
                }
