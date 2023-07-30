@@ -1,4 +1,5 @@
 import { BookingsTrip, State, TripType, User } from "../commons/types";
+
 export const getUser = (state: State):User|null => state.auth.user;
 export const getIsUserFetching = (state:State):boolean => state.auth.isUserFetching;
 export const getTrips = (state: State): TripType[] => state.trips.tripsList;

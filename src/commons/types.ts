@@ -1,3 +1,8 @@
+
+import { store } from "../redux/store";
+
+export type State = ReturnType<typeof store.getState>
+
 export type InputInfo = {
    inputName: string;
    label?: string;
@@ -38,6 +43,7 @@ export type BookingsTrip = {
 export interface User {
    fullName: string;
    email: string;
+   id: string;
 }
 
 export interface NewUser {
@@ -62,8 +68,3 @@ export type BookingsState = {
    isFetchingBookings: boolean;
 }
 
-export type State = {
-    auth: UserState,
-    trips: TripState,
-    bookings: BookingsState
-}

@@ -10,7 +10,6 @@ import {
    Routes,
 } from 'react-router-dom';
 import {
-   useDispatch,
    useSelector,
 } from 'react-redux';
 import {
@@ -18,6 +17,7 @@ import {
    PublicRoutes,
    PrivatRoutes,
 } from './components/commons';
+import { useAppDispatch } from './redux/store';
 
 import { constants } from './commons/constants';
 import { lokalStorageServices } from './services/commons';
@@ -70,7 +70,7 @@ const token: string | undefined =
    lokalStorageServices.getUserFromLocal();
 
 const App = () => {
-   const dispatcher: any = useDispatch();
+   const dispatcher = useAppDispatch();
    const [isUser, setIsUser] = useState(!!token);
 
    const user: User | null = useSelector(getUser);

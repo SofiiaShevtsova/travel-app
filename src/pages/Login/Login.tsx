@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../redux/store';
 import { constants } from '../../commons/constants';
 import {
    InputInfo,
@@ -38,7 +38,7 @@ const Login = () => {
       },
    ];
 
-   const dispatcher: any = useDispatch();
+   const dispatcher = useAppDispatch();
 
    const onSubmit = (user: NewUser) => {
       dispatcher(logIn(user));

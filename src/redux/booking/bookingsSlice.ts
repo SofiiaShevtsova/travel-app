@@ -24,7 +24,7 @@ const initialState: BookingsState = {
    isFetchingBookings: false,
 };
 
-export const bookingsSlice: any = createSlice({
+export const bookingsSlice = createSlice({
    name: 'bookings',
    initialState,
    reducers: {},

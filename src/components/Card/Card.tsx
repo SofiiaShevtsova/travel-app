@@ -6,7 +6,7 @@ import { CardBox, CardContents } from "./card_styles";
 export const Card = ({ trip }: { trip: TripType }) => {
   return (
     <CardBox data-test-id="trip-card">
-      <img data-test-id="trip-card-image" src={trip.image} alt="trip photo" />
+      <img data-test-id="trip-card-image" src={trip.image} alt="trip" />
       <CardContents>
         <CardInfo trip={trip} />
         <Price price={trip.price} />

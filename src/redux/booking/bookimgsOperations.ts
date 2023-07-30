@@ -28,18 +28,18 @@ export const getAllBookings = createAsyncThunk(
 export const addNewBooking = createAsyncThunk(
    constants.ACTIONS.ADD_BOOKING,
    async (
-      booking: BookingsTrip,
+      booking: { tripId: string; guests: number; date: string; },
       { rejectWithValue, getState },
    ) => {
       try {
+         const { bookings, auth }: State =
+            getState() as State;
+         
          const newBooking =
             await apiRequest.postRequest(
                constants.REQUEST_API.BOOKINGS,
-               booking,
+               {...booking, userId: auth.user?.id}
             );
-
-         const { bookings }: State =
-            getState() as State;
 
          return [
             ...bookings.bookingsList,

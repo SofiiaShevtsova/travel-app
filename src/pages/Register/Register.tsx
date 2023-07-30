@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../redux/store';
 import { constants } from '../../commons/constants';
 import {
    InputInfo,
@@ -49,7 +49,7 @@ const Register = () => {
       },
    ];
 
-   const dispatcher: any = useDispatch();
+   const dispatcher = useAppDispatch();
 
    const onSubmit = (newUser: NewUser) => {
       dispatcher(signUp(newUser));
