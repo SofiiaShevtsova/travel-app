@@ -15,7 +15,7 @@ const initialState: TripState = {
   isFetching: false,
 };
 
-export const tripsSlice:any = createSlice({
+export const tripsSlice = createSlice({
   name: "trips",
   initialState,
   reducers: {},

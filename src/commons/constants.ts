@@ -23,6 +23,9 @@ interface Constants {
     LOG_OUT: string;
     GET_TRIPS: string;
     GET_ONE_TRIP: string;
+    GET_BOOKINGS: string;
+    ADD_BOOKING: string;
+    REMOVE_BOOKING: string;
   };
 }
 
@@ -53,6 +56,9 @@ export const constants: Constants = {
     GET_USER: "auth/get-current-user",
     LOG_OUT: "auth/log-out",
     GET_TRIPS: 'trips/get-all',
-    GET_ONE_TRIP:'trips/get-one'
+    GET_ONE_TRIP: 'trips/get-one',
+    GET_BOOKINGS: 'bookings/get-all',
+    ADD_BOOKING: 'bookimgs/add-one',
+    REMOVE_BOOKING: 'booking/remove-one'
   },
 };

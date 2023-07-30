@@ -5,9 +5,9 @@ import {
 } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import {
-   useDispatch,
    useSelector,
 } from 'react-redux';
+import { useAppDispatch } from '../../redux/store';
 
 import { TripType } from '../../commons/types';
 import {
@@ -22,7 +22,7 @@ import {
    InputBox,
    TripList,
 } from './main_styles';
-import { getTrips } from '../../redux/trip/tripSelectors';
+import { getTrips } from '../../redux/selectors';
 import { getAllTrips } from '../../redux/trip/tripOperations';
 
 const selectsArray = [
@@ -54,7 +54,7 @@ const selectsArray = [
 const Main = () => {
    const tripsList = useSelector(getTrips);
 
-   const dispatcher: any = useDispatch();
+   const dispatcher = useAppDispatch();
 
    const [query, setQuery] = useState('');
    const [duration, setDuration] = useState('');

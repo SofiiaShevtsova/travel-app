@@ -10,7 +10,8 @@ export {Form} from './Form/Form'
 export {Header} from "./Header/Header";
 export {Input} from "./Input/Input";
 export {LinkIcon} from "./Links/LinkIcon";
-export {LinkText} from "./Links/LinksText";
+export { LinkText } from "./Links/LinksText";
+export {Loader} from './Loader/Loader'
 export {Loyout} from "./Loyout/Loyout";
 export { Modal } from "./Modal/Modal";
 export { PublicRoutes } from './Routes/PublicRoutes';

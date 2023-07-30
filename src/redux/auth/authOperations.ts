@@ -14,7 +14,7 @@ export const signUp = createAsyncThunk(
       try {
          const {
             token,
-            user: { fullName, email },
+            user: { fullName, email, id },
          } = await apiRequest.postRequest(
             constants.REQUEST_API.AUTH +
                '/sign-up',
@@ -25,7 +25,7 @@ export const signUp = createAsyncThunk(
             token,
          );
 
-         return { fullName, email };
+         return { fullName, email, id };
       } catch (error) {
          // toast.error(`${error.response.data.message}`, {
          //   position: toast.POSITION.TOP_CENTER,
@@ -44,7 +44,7 @@ export const logIn = createAsyncThunk(
       try {
          const {
             token,
-            user: { fullName, email },
+            user: { fullName, email, id },
          } = await apiRequest.postRequest(
             constants.REQUEST_API.AUTH +
                '/sign-in',
@@ -55,7 +55,7 @@ export const logIn = createAsyncThunk(
             token,
          );
 
-         return { fullName, email };
+         return { fullName, email, id };
       } catch (error) {
          // toast.error(`${error.response.data.message}`, {
          //   position: toast.POSITION.TOP_CENTER,
@@ -78,12 +78,12 @@ export const getCurrentUser = createAsyncThunk(
    constants.ACTIONS.GET_USER,
    async (_, { rejectWithValue }) => {
       try {
-         const { fullName, email } =
+         const { fullName, email, id } =
             await apiRequest.getRequest(
                constants.REQUEST_API.AUTH +
                   '/authenticated-user',
             );
-         return { fullName, email };
+         return { fullName, email, id };
       } catch (error) {
          return rejectWithValue(error);
       }

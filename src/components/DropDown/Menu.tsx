@@ -1,11 +1,11 @@
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../redux/store';
 import { MenuBox } from './dropdownMenu_styles';
 import { ButtonText } from '../commons';
 import { User } from '../../commons/types';
 import { logOut } from '../../redux/auth/authOperations';
 
 const Menu = ({ user }: { user: User }) => {
-   const dispatcher: any = useDispatch();
+   const dispatcher = useAppDispatch();
 
    const onLogOutClick = () => {
       dispatcher(logOut());

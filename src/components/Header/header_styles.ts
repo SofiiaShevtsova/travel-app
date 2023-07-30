@@ -42,14 +42,3 @@ export const BookingLink = styled.div`
   align-items: center;
   padding: 0 20px;
 `;
-
-export const BookingTotal = styled.span`
-  position: absolute;
-  bottom: 10px;
-  right: 5px;
-  padding: 2px 5px;
-  color: ${(p) => p.theme.colors.blue400};
-  background-color: ${(p) => p.theme.colors.blue200};
-  font-size: ${(p) => p.theme.fonts.size200};
-  border-radius: 50%;
-`;
