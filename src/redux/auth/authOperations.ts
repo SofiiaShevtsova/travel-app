@@ -68,6 +68,8 @@ export const logIn = createAsyncThunk(
 export const logOut = createAsyncThunk(
    constants.ACTIONS.LOG_OUT,
    () => {
+      console.log('yes');
+      
       apiRequest.setToken('');
       lokalStorageServices.clearLocal();
       return true;

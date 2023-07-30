@@ -9,13 +9,13 @@ export const LoaderBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.3);
 `;
 
 export const LoaderStyle = styled.div`  
   width: 60px;
   height: 60px;
-  border: 4px solid var(--color-blue-200);
+  border: 4px solid ${p=>p.theme.colors.blue200};
   border-top: 4px solid transparent;
   border-radius: 50%;
   animation: rotate 1.2s infinite linear;

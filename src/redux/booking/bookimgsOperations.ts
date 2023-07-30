@@ -6,6 +6,7 @@ import {
    BookingsTrip,
    State,
 } from '../../commons/types';
+import { toast } from 'react-toastify';
 
 export const getAllBookings = createAsyncThunk(
    constants.ACTIONS.GET_BOOKINGS,
@@ -17,9 +18,9 @@ export const getAllBookings = createAsyncThunk(
             );
          return list;
       } catch (error) {
-         // toast.error(`${error.response.data.message}`, {
-         //   position: toast.POSITION.TOP_CENTER,
-         // });
+         console.log(error);
+         
+         toast.error(`${error}`);
          return rejectWithValue(error);
       }
    },
@@ -35,7 +36,7 @@ export const addNewBooking = createAsyncThunk(
          const { bookings, auth }: State =
             getState() as State;
          
-         const newBooking =
+         const newBooking:BookingsTrip =
             await apiRequest.postRequest(
                constants.REQUEST_API.BOOKINGS,
                {...booking, userId: auth.user?.id}

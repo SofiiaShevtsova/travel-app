@@ -3,37 +3,38 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { apiRequest } from '../../helpers/commons';
 import { constants } from '../../commons/constants';
 import { TripType } from '../../commons/types';
+import { toast as notification } from 'react-toastify';
+import { logOut } from '../auth/authOperations';
 
 export const getAllTrips = createAsyncThunk(
    constants.ACTIONS.GET_TRIPS,
-   async (
-      _,
-      { rejectWithValue },
-   ) => {
+   async (_, { rejectWithValue, dispatch }) => {
       try {
-         const data:TripType[] = await apiRequest.getRequest(
-            constants.REQUEST_API.TRIPS,
-         );
+         const data: TripType[] =
+            await apiRequest.getRequest(
+               constants.REQUEST_API.TRIPS,
+            );
          return data;
-      } catch (error) {
-         // toast.error(`${error.response.data.message}`, {
-         //   position: toast.POSITION.TOP_CENTER,
-         // });
-         return rejectWithValue(error);
+      } catch (error: any) {
+         if (error.status === 401) {
+            dispatch(logOut());
+         }
+         notification.error(error.statusText);
+         return rejectWithValue(error.status);
       }
    },
 );
 
 export const getOneTrip = createAsyncThunk(
    constants.ACTIONS.GET_ONE_TRIP,
-   async (
-      id:string,
-      { rejectWithValue },
-   ) => {
+   async (id: string, { rejectWithValue }) => {
       try {
-         const trip:TripType = await apiRequest.getRequest(
-            constants.REQUEST_API.TRIPS+'/'+id,
-         );
+         const trip: TripType =
+            await apiRequest.getRequest(
+               constants.REQUEST_API.TRIPS +
+                  '/' +
+                  id,
+            );
          return trip;
       } catch (error) {
          // toast.error(`${error.response.data.message}`, {
@@ -43,7 +44,6 @@ export const getOneTrip = createAsyncThunk(
       }
    },
 );
-
 
 // export const logIn = createAsyncThunk(
 //    constants.ACTIONS.SIGN_IN,
