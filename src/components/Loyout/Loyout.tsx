@@ -12,6 +12,8 @@ import {
    getIsFetchingBookings,
    getIsUserFetching,
 } from '../../redux/selectors';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Loyout = () => {
    const isUserFetching: boolean = useSelector(
@@ -33,6 +35,19 @@ export const Loyout = () => {
          {(isUserFetching ||
             isFetching ||
             isFetchingBookings) && <Loader />}
+         <ToastContainer
+            className='notification'
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+         />
       </LoyoutBox>
    );
 };
