@@ -4,12 +4,13 @@ import { apiRequest } from '../../helpers/commons';
 import { constants } from '../../commons/constants';
 import { NewUser } from '../../commons/types';
 import { lokalStorageServices } from '../../services/localStorageServices';
+import { catchError } from '../../helpers/catchError';
 
 export const signUp = createAsyncThunk(
    constants.ACTIONS.SIGN_UP,
    async (
       newUser: NewUser,
-      { rejectWithValue },
+      { rejectWithValue, dispatch },
    ) => {
       try {
          const {
@@ -26,11 +27,9 @@ export const signUp = createAsyncThunk(
          );
 
          return { fullName, email, id };
-      } catch (error) {
-         // toast.error(`${error.response.data.message}`, {
-         //   position: toast.POSITION.TOP_CENTER,
-         // });
-         return rejectWithValue(error);
+      } catch (error: any) {
+         catchError({ error, dispatch });
+         return rejectWithValue(error.status);
       }
    },
 );
@@ -39,7 +38,7 @@ export const logIn = createAsyncThunk(
    constants.ACTIONS.SIGN_IN,
    async (
       exixtsUser: NewUser,
-      { rejectWithValue },
+      { rejectWithValue, dispatch },
    ) => {
       try {
          const {
@@ -56,11 +55,9 @@ export const logIn = createAsyncThunk(
          );
 
          return { fullName, email, id };
-      } catch (error) {
-         // toast.error(`${error.response.data.message}`, {
-         //   position: toast.POSITION.TOP_CENTER,
-         // });
-         return rejectWithValue(error);
+      } catch (error: any) {
+         catchError({ error, dispatch });
+         return rejectWithValue(error.status);
       }
    },
 );
@@ -68,8 +65,6 @@ export const logIn = createAsyncThunk(
 export const logOut = createAsyncThunk(
    constants.ACTIONS.LOG_OUT,
    () => {
-      console.log('yes');
-      
       apiRequest.setToken('');
       lokalStorageServices.clearLocal();
       return true;
@@ -78,7 +73,7 @@ export const logOut = createAsyncThunk(
 
 export const getCurrentUser = createAsyncThunk(
    constants.ACTIONS.GET_USER,
-   async (_, { rejectWithValue }) => {
+   async (_, { rejectWithValue, dispatch }) => {
       try {
          const { fullName, email, id } =
             await apiRequest.getRequest(
@@ -86,8 +81,9 @@ export const getCurrentUser = createAsyncThunk(
                   '/authenticated-user',
             );
          return { fullName, email, id };
-      } catch (error) {
-         return rejectWithValue(error);
+      } catch (error: any) {
+         catchError({ error, dispatch });
+         return rejectWithValue(error.status);
       }
    },
 );

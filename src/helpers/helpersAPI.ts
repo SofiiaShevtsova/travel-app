@@ -26,7 +26,7 @@ class APIRequest {
       fetch(this.#baseURL + url, {
          method: 'GET',
          headers: {
-            // ...this.checkToken(),
+            ...this.checkToken(),
          },
       })
          .then((response) =>
