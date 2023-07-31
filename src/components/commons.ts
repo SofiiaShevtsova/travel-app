@@ -10,10 +10,13 @@ export {Form} from './Form/Form'
 export {Header} from "./Header/Header";
 export {Input} from "./Input/Input";
 export {LinkIcon} from "./Links/LinkIcon";
-export {LinkText} from "./Links/LinksText";
+export { LinkText } from "./Links/LinksText";
+export {Loader} from './Loader/Loader'
 export {Loyout} from "./Loyout/Loyout";
-export {Modal} from "./Modal/Modal";
-export {Price} from "./Price/Price";
+export { Modal } from "./Modal/Modal";
+export { PublicRoutes } from './Routes/PublicRoutes';
+export { PrivatRoutes } from './Routes/PrivatRoutes';
+export { Price } from "./Price/Price";
 export {Select} from "./Select/Select";
 export {Text} from "./Text/Text";
 export {Title} from "./Title/Title";

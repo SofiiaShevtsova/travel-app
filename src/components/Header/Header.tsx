@@ -1,26 +1,24 @@
-import { useContext } from "react";
 import { BiUser, BiBriefcaseAlt } from "react-icons/bi";
-
-import { AppContext } from "../../App";
+import { useSelector } from 'react-redux';
 import { constants } from "../../commons/constants";
 import {ButtonIcon, LinkIcon, DropDownMenu, Container} from "../commons";
 import Logo from "./Logo";
 import Menu from "../DropDown/Menu";
 import {
-  BookingTotal,
   HeaderBox,
   NavigationBox,
   BookingLink,
 } from "./header_styles";
+import { getUser } from "../../redux/selectors";
 
 export const Header = () => {
-  const { tripsList, bookingList } = useContext(AppContext);
+const user = useSelector(getUser)
   return (
     <HeaderBox>
       <Container>
         <>
           <Logo />
-          {tripsList && (
+          {user && (
             <NavigationBox data-test-id="header-nav">
               <BookingLink>
                 <LinkIcon
@@ -28,9 +26,9 @@ export const Header = () => {
                   icon={<BiBriefcaseAlt />}
                   dataAtribute={"header-bookings-link"}
                 />
-                {bookingList && bookingList?.length > 0 && (
+                {/* {bookingList && bookingList?.length > 0 && (
                   <BookingTotal>{bookingList?.length}</BookingTotal>
-                )}
+                )} */}
               </BookingLink>
               <DropDownMenu
                 button={
@@ -40,7 +38,7 @@ export const Header = () => {
                     dataAtribute={"header-profile-nav"}
                   />
                 }
-                menu={<Menu />}
+                menu={<Menu user={ user } />}
               />
             </NavigationBox>
           )}

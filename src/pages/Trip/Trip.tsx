@@ -1,30 +1,30 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import {
+   useSelector,
+} from 'react-redux';
+import { useAppDispatch } from "../../redux/store";
 
-import { AppContext } from "../../App";
+
 import { TripType } from "../../commons/types";
 import {CardInfo, ButtonText, Text, Price, Modal} from "../../components/commons";
 import { TripBox, Image, TripContent } from "./trip_styles";
+import { getOneTrip } from "../../redux/trip/tripOperations";
+import { getCurrentTrip } from "../../redux/selectors";
 
 const Trip = () => {
   const { tripId } = useParams();
-  const { tripsList } = useContext(AppContext);
+
+   const dispatcher = useAppDispatch();
+  const trip:TripType|null = useSelector(getCurrentTrip);
 
   const [openModal, setOpen] = useState(false);
-  const [trip, setTrip]: [
-    TripType | undefined,
-    React.Dispatch<React.SetStateAction<any>>
-  ] = useState();
 
   useEffect(() => {
-    if (tripId && tripsList) {
-      const tripFinded: TripType | undefined = tripsList?.find(
-        (trip) => trip.id === tripId
-      );
-      tripFinded && setTrip(tripFinded);
+    if (tripId) {
+      dispatcher(getOneTrip(tripId));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatcher, tripId]);
 
   const onClick = () => {
     setOpen(true);

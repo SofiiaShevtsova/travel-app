@@ -1,0 +1,12 @@
+{
+  "tabWidth": 3,
+  "printWidth": 50,
+  "trailingComma": "all",
+  "singleQuote": true,
+  "semi": true,
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "importOrder": ["^\\u0000", "^react", "^@?\\w", "^\\.", "^\\u0000"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}

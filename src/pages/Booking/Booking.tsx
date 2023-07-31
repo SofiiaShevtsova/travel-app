@@ -1,28 +1,39 @@
-import { useContext } from "react";
+import { SyntheticEvent, useEffect } from "react";
 import { RiCloseFill } from "react-icons/ri";
+import {
+   useSelector,
+} from 'react-redux';
+import { useAppDispatch } from "../../redux/store";
 
-import { AppContext } from "../../App";
 import { BookingsTrip } from "../../commons/types";
 import {ButtonIcon} from "../../components/commons";
 import { BookingBox, BookingItem, BookingTitle, TotalPrice } from "./booking_styles";
+import { getBookings } from "../../redux/selectors";
+import { getAllBookings, removeBooking } from "../../redux/booking/bookimgsOperations";
 
 const Booking = () => {
-  const { bookingList, setBooking } = useContext(AppContext);
+   const dispatcher = useAppDispatch();
+  const bookingsList:BookingsTrip[] = useSelector(getBookings);
 
-    const removeBooking = (event: any) => {
-    if (bookingList) {
-      const newBooking: BookingsTrip[] = bookingList.filter(
-        (booking) => booking.tripId !== event.currentTarget.id
-      );
-      setBooking && setBooking(newBooking);
+  useEffect(() => {
+    if (bookingsList.length===0) {
+      dispatcher(getAllBookings());
+    }
+  }, [bookingsList.length, dispatcher]);
+
+  const onRemoveClick = (event: SyntheticEvent) => {
+    const element: Element = event.currentTarget as Element;
+    const id: string = element.id;
+    if (id) {
+    dispatcher(removeBooking(id));
     }
   };
 
   return (
     <BookingBox>
-      {bookingList &&
-        bookingList.map((booking: BookingsTrip) => (
-          <BookingItem data-test-id="booking" key={booking.tripId}>
+      {bookingsList &&
+        bookingsList.map((booking: BookingsTrip) => (
+          <BookingItem data-test-id="booking" key={booking.id}>
             <BookingTitle data-test-id="booking-title">
               {booking.trip.title}
             </BookingTitle>
@@ -30,16 +41,16 @@ const Booking = () => {
               {booking.guests} guests
             </span>
             <span data-test-id="booking-date">
-              {booking.date}
+              {booking.date.slice(0, 10)}
             </span>
             <TotalPrice data-test-id="booking-total">
               {booking.totalPrice} $
             </TotalPrice>
             <ButtonIcon
               dataAtribute="booking-cancel"
-              id={booking.tripId}
+              id={booking.id}
               icon={<RiCloseFill />}
-              onClick={removeBooking}
+              onClick={onRemoveClick}
             />
           </BookingItem>
         ))}

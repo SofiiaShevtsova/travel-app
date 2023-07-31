@@ -1,48 +1,142 @@
-import { createContext, lazy, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { constants } from "./commons/constants";
+import {
+   createContext,
+   lazy,
+   useEffect,
+   useState,
+} from 'react';
+import {
+   Navigate,
+   Route,
+   Routes,
+} from 'react-router-dom';
+import {
+   useSelector,
+} from 'react-redux';
+import {
+   Loyout,
+   PublicRoutes,
+   PrivatRoutes,
+} from './components/commons';
+import { useAppDispatch } from './redux/store';
 
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
-import {Loyout} from "./components/commons";
-import { BookingsTrip, TripType } from "./commons/types";
+import { constants } from './commons/constants';
+import { lokalStorageServices } from './services/commons';
 
-const MainLazy = lazy(() => import("./pages/Main/Main"));
-const TripLazy = lazy(() => import("./pages/Trip/Trip"));
-const BookimgLazy = lazy(() => import("./pages/Booking/Booking"));
+import Login from './pages/Login/Login';
+
+import Register from './pages/Register/Register';
+import {
+   BookingsTrip,
+   TripType,
+   User,
+} from './commons/types';
+import { getCurrentUser } from './redux/auth/authOperations';
+import { apiRequest } from './helpers/helpersAPI';
+import { getUser } from './redux/selectors';
+
+const MainLazy = lazy(
+   () => import('./pages/Main/Main'),
+);
+const TripLazy = lazy(
+   () => import('./pages/Trip/Trip'),
+);
+const BookimgLazy = lazy(
+   () => import('./pages/Booking/Booking'),
+);
 
 export const AppContext: React.Context<{
-  tripsList?: TripType[];
-  setList?: React.Dispatch<any>;
-  user?: string;
-  setUser?: React.Dispatch<React.SetStateAction<string>>;
-  bookingList?: BookingsTrip[];
-  setBooking?:React.Dispatch<any>;
+   tripsList?: TripType[];
+   setList?: React.Dispatch<any>;
+   user?: string;
+   setUser?: React.Dispatch<
+      React.SetStateAction<string>
+   >;
+   bookingList?: BookingsTrip[];
+   setBooking?: React.Dispatch<any>;
 }> = createContext({});
 
 const {
-  ROUTES: { MAIN, REGISTRATION, LOGIN, TRIP, BOOKING, ALL },
+   ROUTES: {
+      MAIN,
+      REGISTRATION,
+      LOGIN,
+      TRIP,
+      BOOKING,
+      ALL,
+   },
 } = constants;
 
-const App = () => {
-  const [tripsList, setList] = useState();
-  const [user, setUser] = useState("");
-  const [bookingList, setBooking] = useState([]);
+const token: string | undefined =
+   lokalStorageServices.getUserFromLocal();
 
-  return (
-    <AppContext.Provider value={{ tripsList, setList, user, setUser, bookingList, setBooking }}>
+const App = () => {
+   const dispatcher = useAppDispatch();
+   const [isUser, setIsUser] = useState(!!token);
+
+   const user: User | null = useSelector(getUser);
+
+   useEffect(() => {
+      if (token) {
+         apiRequest.setToken(token);
+         dispatcher(getCurrentUser());
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []);
+
+   useEffect(() => {
+      user && setIsUser(false);
+   }, [user])
+
+   return (
       <Routes>
-          <Route path={MAIN} element={<Loyout />}>
-            <Route index element={<MainLazy />} />
-            <Route path={TRIP+':tripId'} element={<TripLazy />} />
-            <Route path={BOOKING} element={<BookimgLazy />} />
-            <Route path={REGISTRATION} element={<Register />} />
-            <Route path={LOGIN} element={<Login />} />
-          </Route>
-        <Route path={ALL} element={<Navigate to={MAIN} />} />
+         <Route path={MAIN} element={<Loyout />}>
+            <Route
+               index
+               element={
+                  <PrivatRoutes isUser={!!user || isUser}>
+                     <MainLazy />
+                  </PrivatRoutes>
+               }
+            />
+            <Route
+               path={TRIP + ':tripId'}
+               element={
+                  <PrivatRoutes isUser={!!user || isUser}>
+                     <TripLazy />
+                  </PrivatRoutes>
+               }
+            />
+            <Route
+               path={BOOKING}
+               element={
+                  <PrivatRoutes isUser={!!user || isUser}>
+                     <BookimgLazy />
+                  </PrivatRoutes>
+               }
+            />
+            <Route
+               path={REGISTRATION}
+               element={
+                  <PublicRoutes isUser={!!user || isUser}>
+                     <Register />
+                  </PublicRoutes>
+               }
+            />
+            <Route
+               path={LOGIN}
+               element={
+                  <PublicRoutes isUser={!!user || isUser}>
+                     <Login />
+                  </PublicRoutes>
+               }
+            />
+         </Route>
+         <Route
+            path={ALL}
+            element={<Navigate to={MAIN} />}
+         />
       </Routes>
-    </AppContext.Provider>
-  );
+   );
 };
 
 export default App;
