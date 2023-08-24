@@ -16,6 +16,7 @@ import {
 } from './modal_styles';
 import { useAppDispatch } from '../../redux/store';
 import { addNewBooking } from '../../redux/booking/bookimgsOperations';
+import { setStartDate } from '../../helpers/setStartDate';
 
 export const Modal = ({
    trip,
@@ -42,7 +43,7 @@ export const Modal = ({
          errorsMessage: 'Choice a date!',
          type: 'date',
          dataAtribute: 'book-trip-popup-date',
-         min: new Date().toLocaleDateString('en-ca'),
+         min: setStartDate(),
       },
       {
          inputName: 'guests',
