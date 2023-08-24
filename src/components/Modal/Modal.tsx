@@ -42,6 +42,7 @@ export const Modal = ({
          errorsMessage: 'Choice a date!',
          type: 'date',
          dataAtribute: 'book-trip-popup-date',
+         min: new Date().toLocaleDateString('en-ca'),
       },
       {
          inputName: 'guests',
