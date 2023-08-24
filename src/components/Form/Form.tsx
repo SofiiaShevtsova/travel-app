@@ -54,6 +54,7 @@ export const Form = ({
               type={inputInfo.type}
               dataAtribute={inputInfo.dataAtribute}
               value={inputInfo.value}
+              min={inputInfo.min}
             />
             {errors[name] && <ErrorMessage text={inputInfo.errorsMessage} />}
           </FieldBox>

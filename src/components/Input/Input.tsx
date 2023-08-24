@@ -18,6 +18,7 @@ export const Input = ({
   type = "text",
   dataAtribute,
   value,
+  min
 }: {
   newRef?: RefCallback<HTMLElement>;
   name: string;
@@ -28,6 +29,7 @@ export const Input = ({
   type?: string;
   dataAtribute?: string;
   value?: string | number;
+  min?: string;
 }) => {
   const [newValue, setValue] = useState(value);
 
@@ -52,6 +54,7 @@ export const Input = ({
         type={type}
         data-test-id={dataAtribute}
         value={newValue}
+        min={min}
       />
     </InputBox>
   );
