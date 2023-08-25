@@ -20,7 +20,8 @@ export const ButtonBox = styled.button`
     }
 
     &:hover{
-        text-shadow: ${p=>p.theme.colors.hover} 1px 0 10px;
+        text-shadow: ${p => p.theme.colors.hover} 1px 0 10px;
+        
     }
 
     &:hover svg{
@@ -44,9 +45,12 @@ export const ButtonTextBox = styled.button`
 
   font-family: inherit;
   font-size: ${p => p.theme.fonts.size300};
+
+  transition: ${p=>p.theme.transitions.main};
+
   
   &:focus, &:hover {
-
+  background-color: ${(p) => p.theme.colors.blue300};
   }
 `;
 
