@@ -37,6 +37,13 @@ button{
 img{
   display: block;
   height: 100%;
+  filter: contrast(0.8);
+  transition: all 1s linear;
+}
+
+img:hover{
+  filter: contrast(1);
+  transform: scale(1.2);
 }
 
 *::selection {
