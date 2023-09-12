@@ -24,6 +24,7 @@ import { lokalStorageServices } from './services/commons';
 import Login from './pages/Login/Login';
 
 import Register from './pages/Register/Register';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
 import {
    User,
 } from './commons/types';
@@ -75,7 +76,7 @@ const App = () => {
 
    return (
       <Routes>
-         <Route path={MAIN} element={<Loyout />}>
+         {/* <Route path={MAIN} element={<Loyout />}>
             <Route
                index
                element={
@@ -116,10 +117,10 @@ const App = () => {
                   </PublicRoutes>
                }
             />
-         </Route>
+         </Route> */}
          <Route
             path={ALL}
-            element={<Navigate to={MAIN} />}
+            element={<ErrorPage />}
          />
       </Routes>
    );
