@@ -8,8 +8,8 @@ import {
    useSelector,
 } from 'react-redux';
 import { useAppDispatch } from '../../redux/store';
+import { filterList } from '../../helpers/filterList';
 
-import { TripType } from '../../commons/types';
 import {
    Input,
    Select,
@@ -68,52 +68,12 @@ const Main = () => {
       }
    }, [dispatcher, tripsList.length]);
 
-   useEffect(() => {
-      if (tripsList) {
-         let newList: TripType[] = tripsList;
-         newList = query
-            ? newList.filter(
-                 (trip) =>
-                    trip.title
-                       .toLowerCase()
-                       .search(
-                          query.toLowerCase(),
-                       ) !== -1,
-              )
-            : newList;
-         newList =
-            level !== ''
-               ? newList.filter(
-                    (trip) =>
-                       trip.level === level,
-                 )
-               : newList;
-         newList =
-            duration !== ''
-               ? newList.filter((trip) => {
-                    switch (duration) {
-                       case '0_x_5':
-                          return (
-                             trip.duration < 6
-                          );
-                       case '5_x_10':
-                          return (
-                             trip.duration < 11 &&
-                             trip.duration > 5
-                          );
-                       case '10_x':
-                          return (
-                             trip.duration > 10
-                          );
-                       default:
-                          break;
-                    }
-                    return true;
-                 })
-               : newList;
-         setListFiltred(newList);
-      }
-   }, [query, level, duration, tripsList]);
+  useEffect(() => {
+    if (tripsList) {
+      const newList = filterList({ query, level, duration, tripsList });
+      setListFiltred(newList);
+    }
+  }, [query, level, duration, tripsList]);
 
    const onChangeQuery = (event: ChangeEvent) => {
       const input: HTMLInputElement =
