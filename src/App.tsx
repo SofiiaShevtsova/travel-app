@@ -1,5 +1,4 @@
 import {
-   createContext,
    lazy,
    useEffect,
    useState,
@@ -26,8 +25,6 @@ import Login from './pages/Login/Login';
 
 import Register from './pages/Register/Register';
 import {
-   BookingsTrip,
-   TripType,
    User,
 } from './commons/types';
 import { getCurrentUser } from './redux/auth/authOperations';
@@ -43,17 +40,6 @@ const TripLazy = lazy(
 const BookimgLazy = lazy(
    () => import('./pages/Booking/Booking'),
 );
-
-export const AppContext: React.Context<{
-   tripsList?: TripType[];
-   setList?: React.Dispatch<any>;
-   user?: string;
-   setUser?: React.Dispatch<
-      React.SetStateAction<string>
-   >;
-   bookingList?: BookingsTrip[];
-   setBooking?: React.Dispatch<any>;
-}> = createContext({});
 
 const {
    ROUTES: {
