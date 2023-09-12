@@ -1,54 +1,54 @@
 import {
-   lazy,
+   // lazy,
    useEffect,
-   useState,
+   // useState,
 } from 'react';
 import {
-   Navigate,
+   // Navigate,
    Route,
    Routes,
 } from 'react-router-dom';
-import {
-   useSelector,
-} from 'react-redux';
-import {
-   Loyout,
-   PublicRoutes,
-   PrivatRoutes,
-} from './components/commons';
+// import {
+//    useSelector,
+// } from 'react-redux';
+// import {
+//    Loyout,
+//    PublicRoutes,
+//    PrivatRoutes,
+// } from './components/commons';
 import { useAppDispatch } from './redux/store';
 
 import { constants } from './commons/constants';
 import { lokalStorageServices } from './services/commons';
 
-import Login from './pages/Login/Login';
+// import Login from './pages/Login/Login';
 
-import Register from './pages/Register/Register';
+// import Register from './pages/Register/Register';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
-import {
-   User,
-} from './commons/types';
+// import {
+//    User,
+// } from './commons/types';
 import { getCurrentUser } from './redux/auth/authOperations';
 import { apiRequest } from './helpers/helpersAPI';
-import { getUser } from './redux/selectors';
+// import { getUser } from './redux/selectors';
 
-const MainLazy = lazy(
-   () => import('./pages/Main/Main'),
-);
-const TripLazy = lazy(
-   () => import('./pages/Trip/Trip'),
-);
-const BookimgLazy = lazy(
-   () => import('./pages/Booking/Booking'),
-);
+// const MainLazy = lazy(
+//    () => import('./pages/Main/Main'),
+// );
+// const TripLazy = lazy(
+//    () => import('./pages/Trip/Trip'),
+// );
+// const BookimgLazy = lazy(
+//    () => import('./pages/Booking/Booking'),
+// );
 
 const {
    ROUTES: {
-      MAIN,
-      REGISTRATION,
-      LOGIN,
-      TRIP,
-      BOOKING,
+      // MAIN,
+      // REGISTRATION,
+      // LOGIN,
+      // TRIP,
+      // BOOKING,
       ALL,
    },
 } = constants;
@@ -58,9 +58,9 @@ const token: string | undefined =
 
 const App = () => {
    const dispatcher = useAppDispatch();
-   const [isUser, setIsUser] = useState(!!token);
+   // const [isUser, setIsUser] = useState(!!token);
 
-   const user: User | null = useSelector(getUser);
+   // const user: User | null = useSelector(getUser);
 
    useEffect(() => {
       if (token) {
@@ -70,9 +70,9 @@ const App = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
-   useEffect(() => {
-      user && setIsUser(false);
-   }, [user])
+   // useEffect(() => {
+   //    user && setIsUser(false);
+   // }, [user])
 
    return (
       <Routes>
