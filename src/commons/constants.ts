@@ -44,7 +44,7 @@ export const constants: Constants = {
     USER_NAME: "Git Hub",
   
   REQUEST_API: {
-    BASE_URL: "https://binary-travel-app.xyz/api/v1",
+    BASE_URL: "https://delivery-api-quzs.onrender.com/api",
     AUTH: "/auth",
     TRIPS: "/trips",
     BOOKINGS: "/bookings",
