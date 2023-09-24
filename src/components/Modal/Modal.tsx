@@ -56,6 +56,7 @@ export const Modal = ({
          type: 'number',
          dataAtribute: 'book-trip-popup-guests',
          value: guests,
+         min: '1',
       },
    ];
 
