@@ -2,7 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { apiRequest } from '../../helpers/commons';
 import { constants } from '../../commons/constants';
-import { NewUser } from '../../commons/types';
+import {
+   NewUser,
+   State,
+} from '../../commons/types';
 import { lokalStorageServices } from '../../services/localStorageServices';
 import { catchError } from '../../helpers/catchError';
 
@@ -15,7 +18,7 @@ export const signUp = createAsyncThunk(
       try {
          const {
             token,
-            user: { fullName, email, id },
+            user: { fullName, email, _id },
          } = await apiRequest.postRequest(
             constants.REQUEST_API.AUTH +
                '/sign-up',
@@ -26,7 +29,7 @@ export const signUp = createAsyncThunk(
             token,
          );
 
-         return { fullName, email, id };
+         return { fullName, email, _id };
       } catch (error: any) {
          catchError({ error, dispatch });
          return rejectWithValue(error.status);
@@ -43,7 +46,7 @@ export const logIn = createAsyncThunk(
       try {
          const {
             token,
-            user: { fullName, email, id },
+            user: { fullName, email, _id },
          } = await apiRequest.postRequest(
             constants.REQUEST_API.AUTH +
                '/sign-in',
@@ -53,8 +56,7 @@ export const logIn = createAsyncThunk(
          lokalStorageServices.setUserToLocal(
             token,
          );
-
-         return { fullName, email, id };
+         return { fullName, email, _id };
       } catch (error: any) {
          catchError({ error, dispatch });
          return rejectWithValue(error.status);
@@ -64,10 +66,21 @@ export const logIn = createAsyncThunk(
 
 export const logOut = createAsyncThunk(
    constants.ACTIONS.LOG_OUT,
-   () => {
-      apiRequest.setToken('');
-      lokalStorageServices.clearLocal();
-      return true;
+   async (_, { getState, rejectWithValue }) => {
+      const { auth }: State = getState() as State;
+      try {
+         if (auth.user) {
+            await apiRequest.postRequest(
+               constants.REQUEST_API.AUTH +
+                  '/log-out',
+            );
+         }
+         apiRequest.setToken('');
+         lokalStorageServices.clearLocal();
+         return true;
+      } catch (error: any) {
+         return rejectWithValue(error.status);
+      }
    },
 );
 
@@ -75,12 +88,12 @@ export const getCurrentUser = createAsyncThunk(
    constants.ACTIONS.GET_USER,
    async (_, { rejectWithValue, dispatch }) => {
       try {
-         const { fullName, email, id } =
+         const { fullName, email, _id } =
             await apiRequest.getRequest(
                constants.REQUEST_API.AUTH +
                   '/authenticated-user',
             );
-         return { fullName, email, id };
+         return { fullName, email, _id };
       } catch (error: any) {
          catchError({ error, dispatch });
          return rejectWithValue(error.status);

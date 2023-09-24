@@ -32,6 +32,7 @@ export const addNewBooking = createAsyncThunk(
          tripId: string;
          guests: number;
          date: string;
+         totalPrice: number;
       },
       { rejectWithValue, getState, dispatch },
    ) => {
@@ -44,7 +45,7 @@ export const addNewBooking = createAsyncThunk(
                constants.REQUEST_API.BOOKINGS,
                {
                   ...booking,
-                  userId: auth.user?.id,
+                  userId: auth.user?._id,
                },
             );
          notification.success(
@@ -78,7 +79,7 @@ export const removeBooking = createAsyncThunk(
          const newList: BookingsTrip[] =
             bookings.bookingsList.filter(
                (booking: BookingsTrip) =>
-                  booking.id !== bookingId,
+                  booking._id !== bookingId,
             );
          notification.success(
             'You removed booking!',

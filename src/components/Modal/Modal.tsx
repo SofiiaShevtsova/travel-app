@@ -34,7 +34,7 @@ export const Modal = ({
    ] = useState(1);
 
    const dispatcher = useAppDispatch();
-  
+
    const inputInfoArray: InputInfo[] = [
       {
          inputName: 'date',
@@ -67,19 +67,25 @@ export const Modal = ({
       if (event.target.name === 'guests') {
          setGuests(+event.target.value);
       }
-     if (event.target.name === 'date') {
+      if (event.target.name === 'date') {
          setDate(`${event.target.value}`);
       }
    };
 
    const formSubmit = (data: any) => {
       if (data) {
-        const bookingTrip: { tripId: string; guests: number; date: string; } = {
-            tripId: trip.id,
+         const bookingTrip: {
+            tripId: string;
+            guests: number;
+            date: string;
+            totalPrice: number;
+         } = {
+            tripId: trip._id,
             guests,
             date,
+            totalPrice: trip.price * guests,
          };
-         dispatcher(addNewBooking(bookingTrip))
+         dispatcher(addNewBooking(bookingTrip));
          setOpen(false);
       }
    };

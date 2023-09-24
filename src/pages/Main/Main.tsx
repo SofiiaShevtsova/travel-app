@@ -127,7 +127,7 @@ const Main = () => {
                listFiltred.map((trip) => (
                   <Card
                      trip={trip}
-                     key={trip.id}
+                     key={trip._id}
                   />
                ))}
          </TripList>
