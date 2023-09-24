@@ -13,8 +13,7 @@ import { getAllBookings, removeBooking } from "../../redux/booking/bookimgsOpera
 
 const Booking = () => {
    const dispatcher = useAppDispatch();
-  const bookingsList:BookingsTrip[] = useSelector(getBookings);
-
+  const bookingsList: BookingsTrip[] = useSelector(getBookings);
   useEffect(() => {
     if (bookingsList.length===0) {
       dispatcher(getAllBookings());
@@ -33,9 +32,9 @@ const Booking = () => {
     <BookingBox>
       {bookingsList &&
         bookingsList.map((booking: BookingsTrip) => (
-          <BookingItem data-test-id="booking" key={booking.id}>
+          <BookingItem data-test-id="booking" key={booking._id}>
             <BookingTitle data-test-id="booking-title">
-              {booking.trip.title}
+              {booking.tripId.title}
             </BookingTitle>
             <span data-test-id="booking-guests">
               {booking.guests} guests
@@ -48,7 +47,7 @@ const Booking = () => {
             </TotalPrice>
             <ButtonIcon
               dataAtribute="booking-cancel"
-              id={booking.id}
+              id={booking._id}
               icon={<RiCloseFill />}
               onClick={onRemoveClick}
             />

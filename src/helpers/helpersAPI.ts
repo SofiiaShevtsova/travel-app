@@ -41,7 +41,7 @@ class APIRequest {
 
    postRequest = (
       url: string,
-      data: any,
+      data?: any,
    ): Promise<any> =>
       fetch(this.#baseURL + url, {
          method: 'POST',

@@ -12,7 +12,7 @@ export const Card = ({ trip }: { trip: TripType }) => {
         <Price price={trip.price} />
       </CardContents>
       <LinkText
-        path={constants.ROUTES.TRIP + trip.id}
+        path={constants.ROUTES.TRIP + trip._id}
         text={"Discover a trip"}
         dataAtribute="trip-card-link"
       />

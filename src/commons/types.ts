@@ -16,7 +16,7 @@ export type InputInfo = {
 };
 
 export type TripType = {
-   id: string;
+   _id: string;
    title: string;
    description: string;
    level: string;
@@ -27,15 +27,14 @@ export type TripType = {
 };
 
 export type BookingsTrip = {
-   id: string;
+   _id: string;
    userId: string;
    createdAt: string;
-   trip: {
+   tripId: {
       title: string;
       duration: number;
       price: number;
    };
-   tripId: string;
    guests: number;
    date: string;
    totalPrice: number;
@@ -44,7 +43,7 @@ export type BookingsTrip = {
 export interface User {
    fullName: string;
    email: string;
-   id: string;
+   _id: string;
 }
 
 export interface NewUser {
