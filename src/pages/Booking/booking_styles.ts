@@ -7,7 +7,6 @@ export const BookingBox = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  width: 100%;
   max-width: 600px;
   margin: 0 auto;
 `;
