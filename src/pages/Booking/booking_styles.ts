@@ -29,7 +29,10 @@ position: absolute;
 top: 10px;
 right: 10px;
 height: 20px;
+  }
 
+  & span{
+    margin-right:20px;
   }
 `;
 
