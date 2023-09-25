@@ -19,5 +19,6 @@ export { PrivatRoutes } from './Routes/PrivatRoutes';
 export { Price } from "./Price/Price";
 export {Select} from "./Select/Select";
 export {Text} from "./Text/Text";
-export {Title} from "./Title/Title";
+export { Title } from "./Title/Title";
+export { ToggleTheme } from './ToggleThemeBtn/ToggleBtn';
 
