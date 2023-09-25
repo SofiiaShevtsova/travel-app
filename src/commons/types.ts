@@ -32,7 +32,7 @@ export type BookingsTrip = {
    createdAt: string;
    tripId: {
       title: string;
-      duration: number;
+      image: string;
       price: number;
    };
    guests: number;

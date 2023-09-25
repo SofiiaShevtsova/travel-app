@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const LoyoutBox = styled.div`
+  background-color: ${p => p.theme.colors.body};
+  color: ${p=>p.theme.colors.blue400};
   min-height: 100vh;
   padding-top: 80px;
   margin: 0 auto;

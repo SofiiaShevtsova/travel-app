@@ -44,5 +44,6 @@ min-height: 45px;
 padding:0 15px 0 0;
 display: flex;
 justify-content: center;
-align-items: center;    
+align-items: center;
+pointer-events:none;
 `;

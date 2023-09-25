@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const FooterBox = styled.footer`
-  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;

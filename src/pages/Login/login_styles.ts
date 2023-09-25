@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const LoginBox = styled.div`
   flex:1;
-  width: 100%;
   height: 100%;
   padding: 10px 10px 50px;
   display: flex;

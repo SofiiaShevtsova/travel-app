@@ -1,20 +1,21 @@
-import {
-   lazy,
-   useEffect,
-   useState,
-} from 'react';
+import { lazy, useEffect, useState } from 'react';
 import {
    // Navigate,
    Route,
    Routes,
+   BrowserRouter,
 } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
 import {
-   useSelector,
-} from 'react-redux';
+   theme,
+   darkTheme,
+} from './commons/theme';
 import {
    Loyout,
    PublicRoutes,
    PrivatRoutes,
+   ToggleTheme,
 } from './components/commons';
 import { useAppDispatch } from './redux/store';
 
@@ -25,9 +26,7 @@ import Login from './pages/Login/Login';
 
 import Register from './pages/Register/Register';
 // import ErrorPage from './pages/ErrorPage/ErrorPage';
-import {
-   User,
-} from './commons/types';
+import { User } from './commons/types';
 import { getCurrentUser } from './redux/auth/authOperations';
 import { apiRequest } from './helpers/helpersAPI';
 import { getUser } from './redux/selectors';
@@ -59,6 +58,8 @@ const token: string | undefined =
 const App = () => {
    const dispatcher = useAppDispatch();
    const [isUser, setIsUser] = useState(!!token);
+   const [currentTheme, setTheme] =
+      useState('light');
 
    const user: User | null = useSelector(getUser);
 
@@ -72,57 +73,94 @@ const App = () => {
 
    useEffect(() => {
       user && setIsUser(false);
-   }, [user])
+   }, [user]);
 
    return (
-      <Routes>
-         <Route path={MAIN} element={<Loyout />}>
-            <Route
-               index
-               element={
-                  <PrivatRoutes isUser={!!user || isUser}>
-                     <MainLazy />
-                  </PrivatRoutes>
-               }
-            />
-            <Route
-               path={TRIP + ':tripId'}
-               element={
-                  <PrivatRoutes isUser={!!user || isUser}>
-                     <TripLazy />
-                  </PrivatRoutes>
-               }
-            />
-            <Route
-               path={BOOKING}
-               element={
-                  <PrivatRoutes isUser={!!user || isUser}>
-                     <BookimgLazy />
-                  </PrivatRoutes>
-               }
-            />
-            <Route
-               path={REGISTRATION}
-               element={
-                  <PublicRoutes isUser={!!user || isUser}>
-                     <Register />
-                  </PublicRoutes>
-               }
-            />
-            <Route
-               path={LOGIN}
-               element={
-                  <PublicRoutes isUser={!!user || isUser}>
-                     <Login />
-                  </PublicRoutes>
-               }
-            />
-         </Route>
-         {/* <Route
+      <ThemeProvider
+         theme={
+            currentTheme === 'light'
+               ? theme
+               : darkTheme
+         }
+      >
+         <BrowserRouter>
+            <Routes>
+               <Route
+                  path={MAIN}
+                  element={<Loyout />}
+               >
+                  <Route
+                     index
+                     element={
+                        <PrivatRoutes
+                           isUser={
+                              !!user || isUser
+                           }
+                        >
+                           <MainLazy />
+                        </PrivatRoutes>
+                     }
+                  />
+                  <Route
+                     path={TRIP + ':tripId'}
+                     element={
+                        <PrivatRoutes
+                           isUser={
+                              !!user || isUser
+                           }
+                        >
+                           <TripLazy />
+                        </PrivatRoutes>
+                     }
+                  />
+                  <Route
+                     path={BOOKING}
+                     element={
+                        <PrivatRoutes
+                           isUser={
+                              !!user || isUser
+                           }
+                        >
+                           <BookimgLazy />
+                        </PrivatRoutes>
+                     }
+                  />
+                  <Route
+                     path={REGISTRATION}
+                     element={
+                        <PublicRoutes
+                           isUser={
+                              !!user || isUser
+                           }
+                        >
+                           <Register />
+                        </PublicRoutes>
+                     }
+                  />
+                  <Route
+                     path={LOGIN}
+                     element={
+                        <PublicRoutes
+                           isUser={
+                              !!user || isUser
+                           }
+                        >
+                           <Login />
+                        </PublicRoutes>
+                     }
+                  />
+               </Route>
+               {/* <Route
             path={ALL}
             element={<ErrorPage />}
          /> */}
-      </Routes>
+            </Routes>
+         </BrowserRouter>
+         <ToggleTheme
+            setTheme={setTheme}
+            currentTheme={currentTheme}
+         />
+      </ThemeProvider>
    );
 };
 
