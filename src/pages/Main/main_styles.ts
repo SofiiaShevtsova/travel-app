@@ -47,8 +47,8 @@ export const InputBox = styled.label`
 
 export const TripList = styled.ul`
   padding: 60px 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, auto));
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
   max-width: ${p=>p.theme.widthContainer};

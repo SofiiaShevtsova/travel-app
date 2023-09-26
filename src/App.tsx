@@ -12,7 +12,7 @@ import {
    darkTheme,
 } from './commons/theme';
 import {
-   Loyout,
+   Layout,
    PublicRoutes,
    PrivatRoutes,
    ToggleTheme,
@@ -87,7 +87,7 @@ const App = () => {
             <Routes>
                <Route
                   path={MAIN}
-                  element={<Loyout />}
+                  element={<Layout />}
                >
                   <Route
                      index

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LoyoutBox = styled.div`
+export const LayoutBox = styled.div`
   background-color: ${p => p.theme.colors.body};
   color: ${p=>p.theme.colors.blue400};
   min-height: 100vh;

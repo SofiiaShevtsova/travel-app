@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const CardBox = styled.li`
-display: flex;
+  display: flex;
   flex-direction: column;
-  max-width: 320px;
+  max-width: 300px;
   background-color: ${p=>p.theme.colors.white};
   border-radius: 1px;
   box-shadow: ${p => p.theme.shadow};
