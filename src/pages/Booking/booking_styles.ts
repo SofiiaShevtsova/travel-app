@@ -7,7 +7,7 @@ export const BookingBox = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
 `;
 
@@ -17,6 +17,7 @@ export const BookingItem = styled.li`
   flex-wrap: wrap;
   gap: 40px;
   align-items: flex-end;
+  justify-content: center;
   width: 100%;
   padding: 15px 25px;
   background-color: ${p=>p.theme.colors.blue100};
@@ -37,8 +38,8 @@ height: 20px;
 
 export const BookingImage = styled.img`
   display: inline-block;
-  width: 20%;
-  height: 75px;
+  width: 250px;
+  height: 200px;
   object-fit: cover;
 `;
 

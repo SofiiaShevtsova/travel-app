@@ -6,7 +6,7 @@ import {
    Header,
    Loader,
 } from '../commons';
-import { LoyoutBox } from './loyout_styles';
+import { LayoutBox } from './layout_styles';
 import {
    getIsFetching,
    getIsFetchingBookings,
@@ -15,7 +15,7 @@ import {
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const Loyout = () => {
+export const Layout = () => {
    const isUserFetching: boolean = useSelector(
       getIsUserFetching,
    );
@@ -26,7 +26,7 @@ export const Loyout = () => {
       useSelector(getIsFetchingBookings);
 
    return (
-      <LoyoutBox>
+      <LayoutBox>
          <Suspense fallback={<Loader />}>
             <Outlet />
          </Suspense>
@@ -48,6 +48,6 @@ export const Loyout = () => {
             pauseOnHover
             theme="light"
          />
-      </LoyoutBox>
+      </LayoutBox>
    );
 };

@@ -12,18 +12,23 @@ export const TripBox = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 400px;
+  width: 100%;
+  max-width: 500px;
   height: 400px;
   object-fit: cover;
+  margin: 0 auto;
 `;
 
 export const TripContent = styled.div`
+  width: 100%;
+  max-width: 500px;
   display: flex;
   flex: 1 1 400px;
   flex-direction: column;
   align-items: flex-start;
   gap: 15px;
   padding-top: 20px;
+  margin: 0 auto;
   
   & button{
     max-width: 200px;

@@ -12,7 +12,7 @@ export {Input} from "./Input/Input";
 export {LinkIcon} from "./Links/LinkIcon";
 export { LinkText } from "./Links/LinksText";
 export {Loader} from './Loader/Loader'
-export {Loyout} from "./Loyout/Loyout";
+export {Layout} from "./Layout/Layout";
 export { Modal } from "./Modal/Modal";
 export { PublicRoutes } from './Routes/PublicRoutes';
 export { PrivatRoutes } from './Routes/PrivatRoutes';
