@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const FooterBox = styled.footer`
+  min-height: 10vh;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 export const BookingBox = styled.ul`
-  flex:1;
-  padding:30px 0 50px;
+  height: 74vh;
+  width: 100%;
+  overflow: auto;
+  padding:40px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  max-width: 800px;
   margin: 0 auto;
 `;
 
@@ -18,7 +19,7 @@ export const BookingItem = styled.li`
   gap: 40px;
   align-items: flex-end;
   justify-content: center;
-  width: 100%;
+  max-width: 800px;
   padding: 15px 25px;
   background-color: ${p=>p.theme.colors.blue100};
   border-left: 4px solid ${p=>p.theme.colors.blue200};

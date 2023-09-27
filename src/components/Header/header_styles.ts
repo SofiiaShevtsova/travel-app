@@ -5,7 +5,7 @@ export const HeaderBox = styled.header`
   top: 0;
   left: 0;
   width: 100vw;
-  min-height: 80px;
+  min-height: 15vh;
   display: flex;
   align-items: center;
   padding: 0 20px;
