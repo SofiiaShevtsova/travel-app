@@ -38,8 +38,6 @@ const Booking = () => {
          dispatcher(removeBooking(id));
       }
    };
-   console.log(bookingsList);
-
    return (
       <BookingBox>
          {bookingsList &&
